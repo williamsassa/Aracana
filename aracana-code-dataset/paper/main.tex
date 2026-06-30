@@ -1,0 +1,145 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{ARACANA-Code: A Decontaminated, Causally-Weighted SFT Corpus for
+Small Coding Language Models}
+\author{ARACANA AI \\ \texttt{Paris {\textbullet} Brussels {\textbullet} Europe}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We describe ARACANA-Code, a supervised fine-tuning corpus engineered for a
+3B-parameter coding model. Our thesis is that for small models, the dominant
+lever is not scale but the \emph{structural and causal quality} of the training
+data. We contribute (i) a strict, per-example verification protocol; (ii) a
+two-stage exact $+$ near-duplicate deduplication step; (iii) an $n$-gram
+benchmark \emph{decontamination} stage that we treat as a release gate; and
+(iv) a transparent \emph{causal weighting} scheme that up-weights
+control-flow-bearing and high-complexity examples. We report the data
+methodology and acceptance statistics; model results are reported in
+Section~\ref{sec:results} once training completes. We deliberately frame our
+targets against models of comparable size and against specific larger
+\emph{open} baselines on a defined benchmark subset, rather than claiming
+uniform superiority over frontier systems---a claim a 3B model cannot support.
+\end{abstract}
+
+\section{Introduction}
+Small language models are attractive for sovereign, on-premise and edge
+deployment. Closing the gap to larger models on coding tasks is primarily a
+data problem: a small model has limited capacity, so every training token must
+carry signal. ARACANA-Code operationalises this with an auditable pipeline in
+which no example reaches the final corpus without passing structural, semantic
+and integrity checks.
+
+\paragraph{Scope of claims.} We do \emph{not} claim a 3B model surpasses
+frontier systems (e.g.\ the largest proprietary models) across all benchmarks;
+that is not achievable at this parameter count. Our goal is best-in-class
+performance \emph{for its size}, and to beat specific larger open coding models
+on a chosen subset of public benchmarks. All reported numbers are real and
+decontaminated.
+
+\section{Corpus Design}
+The corpus is organised into five silos with a target of 109K examples
+(Table~\ref{tab:silos}). Each example is stored in a canonical record with
+explicit provenance (\texttt{source}, \texttt{license}), taxonomy
+(\texttt{silo}, \texttt{subcategory}), per-example \texttt{quality} signals and
+a \texttt{causal\_weight}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llr}
+\toprule
+Silo & Subcategories & Target \\
+\midrule
+Code          & algorithmic, swe\_bench, optimisation & 45{,}000 \\
+Terminal      & shell\_simple, shell\_agentic         & 15{,}000 \\
+Math          & competition, proofs                   & 18{,}000 \\
+Long context  & codebase, documents                   & 15{,}000 \\
+Agentic       & tool\_use, deep\_search               & 16{,}000 \\
+\midrule
+\textbf{Total} & & \textbf{109{,}000} \\
+\bottomrule
+\end{tabular}
+\caption{Target composition of ARACANA-Code.}
+\label{tab:silos}
+\end{table}
+
+\section{Pipeline}
+The pipeline is a deterministic sequence of checkpointed stages.
+
+\subsection{Verification}
+Each example must pass, in order: structural validity (well-formed
+system/user/assistant turns ending on the assistant); taxonomy validity (silo
+and subcategory must match the registered ontology); code syntax (every Python
+fenced block must parse under the CPython AST, and code-typed examples must
+contain at least one fenced block); chain-of-thought completeness (CoT-tagged
+examples must contain $\geq 3$ explicit steps); terminal-state coherence
+(shell-typed examples annotate every command with a preceding
+\texttt{\# STATE} / \texttt{\# COST}); length bounds; non-triviality (no
+$O(1)$ code problems); optional license presence; and a leaked-prompt-artefact
+filter. Rejections are tallied by reason for full auditability.
+
+\subsection{Deduplication}
+We remove exact duplicates on a SHA-256 of normalised text, then near-duplicates
+using 64-permutation MinHash over 5-word shingles with banded LSH (16 bands)
+and a Jaccard threshold of $0.85$. We verified that the MinHash estimate tracks
+the true Jaccard closely (e.g.\ $0.594$ estimated vs.\ $0.576$ true on a held
+pair), validating the approximation.
+
+\subsection{Decontamination}
+\label{sec:decon}
+We treat benchmark contamination as a release-blocking defect. We index every
+$13$-gram (token-level) of every benchmark test item in our evaluation suite and
+drop any training example sharing one. Removed examples are attributed to their
+source benchmark. This stage runs \emph{after} dedup so contamination cannot
+re-enter through a near-duplicate.
+
+\subsection{Causal Weighting}
+Each surviving example receives a loss weight
+\(w \in [1, 4]\) that multiplicatively boosts control-flow-bearing code,
+priority benchmark families (SWE-bench, terminal, tool-use, deep-search),
+high-complexity solutions ($O(n^2)$ and above) and CoT traces. The weighting is
+intentionally transparent and is refined post-hoc from training-time gradient
+statistics.
+
+\section{Data Statistics}
+\label{sec:stats}
+On a representative real ingestion slice of 1{,}800 examples drawn from public
+permissive datasets, the verification stage accepted 86.8\% (1{,}562), with
+rejections dominated by length ($n{=}200$), trivial complexity ($n{=}14$),
+invalid Python syntax ($n{=}13$) and missing code blocks ($n{=}11$). These
+acceptance rates are reported here as pipeline characterisation; the full-corpus
+table will replace this paragraph at build time.
+
+\section{Results}
+\label{sec:results}
+\emph{To be completed after training.} We will report pass@1 / pass@$k$ on the
+public benchmark subset, each number computed on a decontaminated test set, with
+the exact base model, training recipe and decoding parameters. Targets are
+expressed relative to comparably-sized models and named larger open baselines.
+
+\section{Ethics and Integrity}
+ARACANA-Code follows the ARACANA principle of sovereign, auditable AI. We do not
+redistribute data whose license forbids it; license status is recorded per
+example and unverified sources are flagged before release. Decontamination
+(Section~\ref{sec:decon}) ensures reported scores reflect generalisation rather
+than memorisation. We disclose the true scope of our claims rather than
+overstating small-model capability.
+
+\section{Reproducibility}
+The construction toolkit (schema, verifier, deduplicator, decontaminator,
+balancer, pipeline) and a runnable end-to-end demo accompany this paper. Every
+stage is deterministic under a fixed seed and emits a machine-readable report.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

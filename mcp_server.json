@@ -1,0 +1,485 @@
+{
+  "mcpServers": {
+    "huggingface": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@huggingface/mcp-server-huggingface"
+      ],
+      "env": {
+        "HF_TOKEN": "${HF_TOKEN}",
+        "HF_HUB_ENABLE_HF_TRANSFER": "1",
+        "HF_HUB_DOWNLOAD_TIMEOUT": "300",
+        "HF_DATASETS_CACHE": "/data/cache/huggingface",
+        "HF_HOME": "/data/cache/huggingface",
+        "HF_DATASETS_MAX_IN_MEMORY": "10000",
+        "HF_DATASETS_STREAMING": "true"
+      },
+      "timeout": 600,
+      "retry": {
+        "max_attempts": 5,
+        "backoff": "exponential",
+        "initial_delay_ms": 1000,
+        "max_delay_ms": 60000
+      },
+      "description": "Accès direct aux datasets HuggingFace pour téléchargement et streaming des données de code, math, et agentic.",
+      "capabilities": [
+        "search_datasets",
+        "download_dataset",
+        "get_dataset_info",
+        "stream_dataset",
+        "list_dataset_splits",
+        "get_dataset_card"
+      ]
+    },
+
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}",
+        "GITHUB_API_URL": "https://api.github.com",
+        "GITHUB_MAX_REQUESTS_PER_HOUR": "5000",
+        "GITHUB_SEARCH_RESULTS_MAX": "100",
+        "GITHUB_FILE_SIZE_LIMIT_MB": "10",
+        "GITHUB_TIMEOUT_MS": "30000"
+      },
+      "timeout": 120,
+      "retry": {
+        "max_attempts": 3,
+        "backoff": "exponential",
+        "initial_delay_ms": 2000,
+        "max_delay_ms": 30000
+      },
+      "description": "Extraction de code source réel depuis GitHub pour SWE-Bench : issues, PRs, diffs, et historiques de commits.",
+      "capabilities": [
+        "search_repositories",
+        "get_file_contents",
+        "list_commits",
+        "search_code",
+        "search_issues",
+        "get_pull_request",
+        "get_diff",
+        "list_releases"
+      ]
+    },
+
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/data/super_dataset"
+      ],
+      "env": {
+        "ALLOWED_DIRECTORIES": "/data/super_dataset,/data/cache,/data/raw,/data/processed,/data/final,/data/logs,/data/exports",
+        "MAX_FILE_SIZE_MB": "500",
+        "ENABLE_WATCHING": "false",
+        "FILE_ENCODING": "utf-8",
+        "CREATE_BACKUP_ON_WRITE": "true",
+        "BACKUP_DIR": "/data/backups",
+        "MAX_BACKUPS": "10"
+      },
+      "timeout": 60,
+      "retry": {
+        "max_attempts": 3,
+        "backoff": "linear",
+        "initial_delay_ms": 500,
+        "max_delay_ms": 5000
+      },
+      "description": "Gestion de l'arborescence complète du projet : silos de données, cache, logs, et exports finaux.",
+      "capabilities": [
+        "read_file",
+        "write_file",
+        "list_directory",
+        "search_files",
+        "get_file_info",
+        "create_directory",
+        "move_file",
+        "delete_file",
+        "get_directory_tree"
+      ]
+    },
+
+    "python-executor": {
+      "command": "python",
+      "args": [
+        "-m",
+        "mcp_server_python_executor"
+      ],
+      "env": {
+        "PYTHONPATH": "/workspace:/data/super_dataset/src",
+        "MAX_EXECUTION_TIME": "30",
+        "MAX_MEMORY_MB": "2048",
+        "SANDBOX_MODE": "true",
+        "ALLOWED_MODULES": "ast,json,re,collections,itertools,math,statistics,datetime,pathlib,typing,dataclasses,hashlib",
+        "BLOCKED_MODULES": "os,sys,subprocess,socket,requests,urllib,http,ftplib,shutil,importlib,ctypes",
+        "PYTHON_VERSION": "3.11",
+        "VENV_PATH": "/data/venv"
+      },
+      "timeout": 45,
+      "retry": {
+        "max_attempts": 2,
+        "backoff": "linear",
+        "initial_delay_ms": 1000,
+        "max_delay_ms": 5000
+      },
+      "description": "Exécution sandboxée de code Python pour vérification syntaxique, tests unitaires, et analyse de complexité.",
+      "capabilities": [
+        "execute_python",
+        "validate_syntax",
+        "run_tests",
+        "profile_complexity",
+        "check_types",
+        "analyze_ast",
+        "measure_coverage"
+      ]
+    },
+
+    "web-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@anthropic/mcp-server-web-search"
+      ],
+      "env": {
+        "SEARCH_PROVIDER": "duckduckgo",
+        "MAX_RESULTS": "20",
+        "SEARCH_TIMEOUT_MS": "15000",
+        "ENABLE_CACHING": "true",
+        "CACHE_TTL_SECONDS": "3600",
+        "USER_AGENT": "SuperDatasetBuilder/1.0 (Research Project; contact@superdataset.ai)",
+        "RESPECT_ROBOTS_TXT": "true",
+        "RATE_LIMIT_REQUESTS_PER_MINUTE": "30"
+      },
+      "timeout": 30,
+      "retry": {
+        "max_attempts": 3,
+        "backoff": "exponential",
+        "initial_delay_ms": 2000,
+        "max_delay_ms": 30000
+      },
+      "description": "Recherche web pour trouver des problèmes de code récents, documentations, et contextes techniques.",
+      "capabilities": [
+        "search",
+        "fetch_page",
+        "search_leetcode",
+        "search_stackoverflow",
+        "search_documentation",
+        "get_trending_repos"
+      ]
+    },
+
+    "shell": {
+      "command": "bash",
+      "args": [
+        "-c",
+        "npx -y @modelcontextprotocol/server-shell"
+      ],
+      "env": {
+        "ALLOWED_COMMANDS": "grep,awk,sed,curl,wc,sort,uniq,head,tail,find,xargs,git,ssh,scp,rsync,cat,ls,mkdir,cp,mv,rm,tar,gzip,gunzip,chmod,chown,ps,kill,top,df,du,netstat,ss,ping,traceroute,nslookup,dig,openssl,jq,yq,python3,node,npm,pip",
+        "BLOCKED_COMMANDS": "shutdown,reboot,init,halt,poweroff,mount,umount,mkfs,dd,fdisk,parted,lvm,iptables,ufw,firewall-cmd,useradd,userdel,usermod,passwd,su,sudo,visudo,chroot,nsenter",
+        "MAX_COMMAND_TIMEOUT": "30",
+        "SANDBOX_MODE": "true",
+        "LOG_COMMANDS": "true",
+        "COMMAND_LOG_FILE": "/data/logs/shell_commands.log",
+        "MAX_OUTPUT_LINES": "5000"
+      },
+      "timeout": 60,
+      "retry": {
+        "max_attempts": 2,
+        "backoff": "linear",
+        "initial_delay_ms": 1000,
+        "max_delay_ms": 10000
+      },
+      "description": "Exécution contrôlée de commandes shell pour la validation des traces terminal et la manipulation de fichiers.",
+      "capabilities": [
+        "execute_command",
+        "validate_command",
+        "get_command_output",
+        "simulate_pipeline",
+        "check_syntax",
+        "get_man_page"
+      ]
+    },
+
+    "database-postgres": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres"
+      ],
+      "env": {
+        "DATABASE_URL": "postgresql://superdataset:${DB_PASSWORD}@localhost:5432/superdataset",
+        "MAX_CONNECTIONS": "20",
+        "CONNECTION_TIMEOUT_MS": "10000",
+        "IDLE_TIMEOUT_MS": "60000",
+        "SSL_MODE": "require",
+        "STATEMENT_TIMEOUT_MS": "30000"
+      },
+      "timeout": 30,
+      "retry": {
+        "max_attempts": 5,
+        "backoff": "exponential",
+        "initial_delay_ms": 1000,
+        "max_delay_ms": 30000
+      },
+      "description": "Base de données PostgreSQL pour le suivi de tous les exemples, leurs métadonnées, et l'historique de vérification.",
+      "capabilities": [
+        "query",
+        "execute",
+        "list_tables",
+        "describe_table",
+        "create_index",
+        "bulk_insert",
+        "export_csv"
+      ]
+    },
+
+    "redis-cache": {
+      "command": "redis-server",
+      "args": [
+        "--port",
+        "6380",
+        "--maxmemory",
+        "8gb",
+        "--maxmemory-policy",
+        "allkeys-lru",
+        "--save",
+        "900",
+        "1",
+        "--save",
+        "300",
+        "10",
+        "--dbfilename",
+        "superdataset_cache.rdb",
+        "--dir",
+        "/data/cache/redis",
+        "--loglevel",
+        "notice"
+      ],
+      "env": {
+        "REDIS_PASSWORD": "${REDIS_PASSWORD}",
+        "REDIS_MAX_CONNECTIONS": "50",
+        "REDIS_SOCKET_TIMEOUT": "5"
+      },
+      "timeout": 10,
+      "retry": {
+        "max_attempts": 3,
+        "backoff": "linear",
+        "initial_delay_ms": 500,
+        "max_delay_ms": 5000
+      },
+      "description": "Cache Redis pour le cache à 3 niveaux : vérification, génération, standardisation. Accélère les accès répétés.",
+      "capabilities": [
+        "get",
+        "set",
+        "delete",
+        "exists",
+        "expire",
+        "keys",
+        "flush_pattern",
+        "get_memory_usage"
+      ]
+    },
+
+    "prometheus-monitoring": {
+      "command": "prometheus",
+      "args": [
+        "--config.file=/etc/prometheus/prometheus.yml",
+        "--storage.tsdb.path=/data/metrics/prometheus",
+        "--storage.tsdb.retention.time=30d",
+        "--web.listen-address=:9090",
+        "--web.enable-lifecycle"
+      ],
+      "env": {
+        "PROMETHEUS_CONFIG": "/data/config/prometheus.yml",
+        "METRICS_RETENTION_DAYS": "30",
+        "SCRAPE_INTERVAL_SECONDS": "15"
+      },
+      "timeout": 10,
+      "description": "Monitoring en temps réel des métriques de qualité, temps de traitement, et coûts API.",
+      "capabilities": [
+        "query_metrics",
+        "get_alerts",
+        "get_targets",
+        "get_rules",
+        "snapshot_metrics"
+      ]
+    },
+
+    "grafana-dashboard": {
+      "command": "grafana-server",
+      "args": [
+        "--config=/etc/grafana/grafana.ini",
+        "--homepath=/usr/share/grafana",
+        "cfg:default.paths.data=/data/grafana",
+        "cfg:default.paths.logs=/data/logs/grafana"
+      ],
+      "env": {
+        "GRAFANA_PORT": "3000",
+        "GRAFANA_ADMIN_USER": "${GRAFANA_ADMIN_USER}",
+        "GRAFANA_ADMIN_PASSWORD": "${GRAFANA_ADMIN_PASSWORD}"
+      },
+      "timeout": 10,
+      "description": "Dashboard temps réel pour visualiser la progression du dataset et les métriques de qualité.",
+      "capabilities": [
+        "get_dashboard",
+        "list_dashboards",
+        "get_panel_data",
+        "export_dashboard"
+      ]
+    },
+
+    "notification-alerts": {
+      "command": "python",
+      "args": [
+        "-m",
+        "mcp_server_notifications"
+      ],
+      "env": {
+        "SLACK_WEBHOOK_URL": "${SLACK_WEBHOOK_URL}",
+        "DISCORD_WEBHOOK_URL": "${DISCORD_WEBHOOK_URL}",
+        "EMAIL_SMTP_HOST": "${EMAIL_SMTP_HOST}",
+        "EMAIL_SMTP_PORT": "587",
+        "EMAIL_FROM": "superdataset@votredomaine.ai",
+        "EMAIL_TO": "equipe@votredomaine.ai",
+        "NOTIFICATION_LEVEL": "warning",
+        "DIGEST_FREQUENCY_HOURS": "6"
+      },
+      "timeout": 15,
+      "retry": {
+        "max_attempts": 3,
+        "backoff": "linear",
+        "initial_delay_ms": 2000,
+        "max_delay_ms": 15000
+      },
+      "description": "Système d'alertes pour les erreurs critiques, les dépassements de quota, et les étapes terminées.",
+      "capabilities": [
+        "send_slack",
+        "send_discord",
+        "send_email",
+        "send_digest",
+        "check_status"
+      ]
+    }
+  },
+
+  "global": {
+    "config": {
+      "log_level": "INFO",
+      "log_file": "/data/logs/mcp_global.log",
+      "max_concurrent_servers": 11,
+      "health_check_interval_seconds": 30,
+      "graceful_shutdown_timeout_seconds": 60,
+      "enable_metrics": true,
+      "metrics_port": 9091,
+      "enable_tracing": true,
+      "tracing_endpoint": "http://localhost:4317"
+    },
+    "security": {
+      "validate_env_vars_on_startup": true,
+      "require_authentication": true,
+      "encrypt_secrets": true,
+      "audit_log_enabled": true,
+      "audit_log_file": "/data/logs/audit.log"
+    },
+    "error_handling": {
+      "global_retry_policy": {
+        "max_attempts": 3,
+        "backoff": "exponential",
+        "initial_delay_ms": 1000,
+        "max_delay_ms": 60000
+      },
+      "circuit_breaker": {
+        "enabled": true,
+        "failure_threshold": 5,
+        "recovery_timeout_seconds": 60,
+        "half_open_max_requests": 3
+      }
+    },
+    "rate_limiting": {
+      "enabled": true,
+      "max_concurrent_calls": 50,
+      "max_calls_per_minute": 1000,
+      "burst_size": 100
+    }
+  },
+
+  "dependencies": {
+    "required_packages": [
+      "@huggingface/mcp-server-huggingface@latest",
+      "@modelcontextprotocol/server-github@latest",
+      "@modelcontextprotocol/server-filesystem@latest",
+      "@modelcontextprotocol/server-postgres@latest",
+      "@modelcontextprotocol/server-shell@latest",
+      "@anthropic/mcp-server-web-search@latest"
+    ],
+    "python_packages": [
+      "mcp-server-python-executor>=1.0.0",
+      "mcp-server-notifications>=1.0.0",
+      "redis>=5.0.0",
+      "psycopg2-binary>=2.9.0",
+      "prometheus-client>=0.19.0"
+    ],
+    "system_requirements": {
+      "node": ">=18.0.0",
+      "python": ">=3.11",
+      "redis": ">=7.0",
+      "postgresql": ">=15.0",
+      "prometheus": ">=2.45.0",
+      "grafana": ">=10.0.0"
+    }
+  },
+
+  "startup_sequence": [
+    "redis-cache",
+    "database-postgres",
+    "filesystem",
+    "huggingface",
+    "github",
+    "python-executor",
+    "web-search",
+    "shell",
+    "prometheus-monitoring",
+    "grafana-dashboard",
+    "notification-alerts"
+  ],
+
+  "health_checks": {
+    "interval_seconds": 30,
+    "timeout_seconds": 10,
+    "unhealthy_threshold": 3,
+    "healthy_threshold": 1,
+    "checks": {
+      "huggingface": {
+        "type": "http",
+        "endpoint": "http://localhost:8081/health",
+        "expected_status": 200
+      },
+      "github": {
+        "type": "http",
+        "endpoint": "http://localhost:8082/health",
+        "expected_status": 200
+      },
+      "database-postgres": {
+        "type": "tcp",
+        "host": "localhost",
+        "port": 5432
+      },
+      "redis-cache": {
+        "type": "tcp",
+        "host": "localhost",
+        "port": 6380
+      },
+      "python-executor": {
+        "type": "command",
+        "command": "python -c 'print(1+1)'",
+        "expected_output": "2"
+      }
+    }
+  }
+}

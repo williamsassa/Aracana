@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #efe9db; /* warm beige */
+  color: #0a0a0b;
+  font-feature-settings: "ss01", "cv01", "cv11";
+}
+
+::selection {
+  background: #0a0a0b;
+  color: #efe9db;
+}
+
+/* ---- Layout helpers ---- */
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-content px-6 md:px-10;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-wide2 text-ink-muted;
+  }
+
+  .display-1 {
+    @apply font-display font-medium tracking-tightest text-ink;
+    font-size: clamp(2.6rem, 6vw, 5.2rem);
+    line-height: 0.98;
+  }
+
+  .display-2 {
+    @apply font-display font-medium tracking-tightest text-ink;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    line-height: 1.02;
+  }
+
+  .lead {
+    @apply text-ink-muted;
+    font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+    line-height: 1.55;
+  }
+
+  .link-underline {
+    @apply relative inline-flex items-center text-ink transition-colors;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 bg-ink transition-transform duration-300;
+  }
+  .link-underline:hover::after {
+    @apply origin-left scale-x-100;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-mono text-[12px] uppercase tracking-wide2 transition-all duration-300;
+  }
+  .btn-dark {
+    @apply btn bg-ink text-paper hover:bg-accent;
+  }
+  .btn-ghost {
+    @apply btn border border-paper-line text-ink hover:border-ink;
+  }
+
+  .card {
+    @apply rounded-2xl border border-paper-line bg-paper-raised transition-all duration-300 hover:border-ink/40 hover:shadow-[0_18px_60px_-30px_rgba(0,0,0,0.35)];
+  }
+
+  .badge-soon {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/5 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wide2 text-accent;
+  }
+  .badge-dev {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-paper-line bg-paper-soft px-2.5 py-1 font-mono text-[10px] uppercase tracking-wide2 text-ink-muted;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-paper-line;
+  }
+
+  .prose-tech p {
+    @apply text-ink-soft leading-relaxed;
+  }
+  .prose-tech h3 {
+    @apply font-display text-xl font-medium text-ink;
+  }
+}
+
+/* ---- Logo "AI reveal" ---- */
+.logo-word {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.logo-ai {
+  color: #e5121a;
+  position: relative;
+}
+
+/* Dotted grid */
+.dot-grid {
+  background-image: radial-gradient(rgba(10, 10, 11, 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ───── Animated background field (monochrome, subtle) ───── */
+.bgfx {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+  background: #efe9db;
+}
+.bgfx::before {
+  /* faint moving grid */
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background-image: linear-gradient(rgba(10, 10, 11, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 10, 11, 0.04) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 75%);
+}
+.bgfx-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+
+/* ───── Starfield (space sections) ───── */
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 75% 20%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 40% 70%, #fff, transparent),
+    radial-gradient(1px 1px at 90% 60%, #fff, transparent),
+    radial-gradient(1px 1px at 60% 45%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 15% 80%, #fff, transparent),
+    radial-gradient(1px 1px at 85% 85%, #fff, transparent),
+    radial-gradient(1px 1px at 33% 12%, #fff, transparent);
+  opacity: 0.7;
+}
+.stars-2 {
+  animation: twinkle 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob,
+  .animate-twinkle,
+  .animate-sweep,
+  .animate-scanline,
+  .animate-marquee,
+  .animate-spin-slow,
+  .animate-spin-rev,
+  .animate-drift,
+  .stars-2 {
+    animation: none !important;
+  }
+}
+
+/* reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

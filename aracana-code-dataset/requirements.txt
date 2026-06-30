@@ -1,0 +1,5 @@
+# Core pipeline (verify/dedup/decontaminate/standardize/balance) is pure stdlib.
+# These are only needed for real HuggingFace ingestion (build_real.py) and tests.
+datasets>=2.18
+huggingface_hub>=0.20
+pytest>=7.0

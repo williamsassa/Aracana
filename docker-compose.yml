@@ -1,0 +1,29 @@
+# ARACANA AI — full stack (frontend + backend)
+# Usage:  docker compose up --build
+# Web:    http://localhost:3030     API:  http://localhost:8000/docs
+# (3000 is reserved for VERITY — ARACANA runs on 3030)
+services:
+  backend:
+    build: ./backend
+    container_name: aracana-backend
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    volumes:
+      - backend-data:/app/data
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Browser calls the API on the host; override for prod deployments.
+        NEXT_PUBLIC_API_BASE_URL: http://localhost:8000
+    container_name: aracana-frontend
+    ports:
+      - "3030:3000"   # host 3030 -> container 3000 (3000 is VERITY's)
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend-data:
