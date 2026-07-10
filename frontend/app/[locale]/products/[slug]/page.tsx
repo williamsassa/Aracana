@@ -1,36 +1,61 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Link } from "@/i18n/navigation";
 import { StatusBadge, Orb } from "@/components/Bits";
 import Reveal from "@/components/Reveal";
 import MethodologySection from "@/components/MethodologySection";
 import SpaceOps from "@/components/SpaceOps";
-import { PRODUCTS, getProduct } from "@/lib/products";
+import CodingAgentShowcase from "@/components/showcase/CodingAgentShowcase";
+import GenerativeReasoningShowcase from "@/components/showcase/GenerativeReasoningShowcase";
+import SwarmShowcase from "@/components/showcase/SwarmShowcase";
+import CurieShowcase from "@/components/showcase/CurieShowcase";
+import EarlyAccessForm from "@/components/EarlyAccessForm";
+import { PRODUCT_SLUGS, getProduct } from "@/lib/products";
+import { locales, type Locale } from "@/i18n/config";
+import { buildAlternates } from "@/lib/seo";
+
+const SHOWCASES: Record<string, React.ComponentType> = {
+  "generative-model": GenerativeReasoningShowcase,
+  "coding-agent-model": CodingAgentShowcase,
+  "state-space-sovereignty-model": SpaceOps,
+  "multi-agent-system": SwarmShowcase,
+  "ai-scientist": CurieShowcase,
+};
 
 export function generateStaticParams() {
-  return PRODUCTS.map((p) => ({ slug: p.slug }));
+  return locales.flatMap((locale) =>
+    PRODUCT_SLUGS.map((slug) => ({ locale, slug }))
+  );
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
-}): Metadata {
-  const p = getProduct(params.slug);
+  params: Promise<{ locale: Locale; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const p = getProduct(locale, slug);
   if (!p) return { title: "Product" };
   return {
     title: p.name,
     description: p.summary,
+    alternates: buildAlternates(`/products/${slug}`),
   };
 }
 
-export default function ProductDetail({
+export default async function ProductDetail({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ locale: Locale; slug: string }>;
 }) {
-  const product = getProduct(params.slug);
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
+  const product = getProduct(locale, slug);
   if (!product) notFound();
+
+  const t = await getTranslations({ locale, namespace: "productDetail" });
+  const c = await getTranslations({ locale, namespace: "common" });
 
   return (
     <>
@@ -43,7 +68,7 @@ export default function ProductDetail({
               href="/products"
               className="font-mono text-[12px] uppercase tracking-wide2 text-ink-muted hover:text-ink"
             >
-              ← All products
+              {t("allProductsBack")}
             </Link>
             <div className="mt-8 flex items-center gap-4">
               <StatusBadge status={product.status} />
@@ -55,15 +80,10 @@ export default function ProductDetail({
             <p className="lead mt-6 max-w-2xl">{product.tagline}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#methodology" className="btn-dark">
-                See our approach
+                {c("seeOurApproach")}
               </a>
-              <a
-                href={`mailto:contact@aracana.ai?subject=Access%20request%20—%20${encodeURIComponent(
-                  product.name
-                )}`}
-                className="btn-ghost"
-              >
-                Request early access
+              <a href="#early-access" className="btn-ghost">
+                {t("requestEarlyAccess")}
               </a>
             </div>
           </Reveal>
@@ -74,7 +94,7 @@ export default function ProductDetail({
       <section className="container-x py-16 md:py-24">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_0.6fr]">
           <Reveal>
-            <div className="eyebrow">Overview</div>
+            <div className="eyebrow">{t("overview")}</div>
             <div className="mt-5 space-y-5">
               {product.overview.map((para, i) => (
                 <p key={i} className="text-lg leading-relaxed text-ink-soft">
@@ -86,7 +106,7 @@ export default function ProductDetail({
 
           <Reveal delay={120}>
             <div className="rounded-2xl border border-paper-line bg-paper-soft p-6 lg:sticky lg:top-28">
-              <div className="eyebrow">Specifications</div>
+              <div className="eyebrow">{t("specifications")}</div>
               <dl className="mt-4 divide-y divide-paper-line">
                 {product.specs.map((s) => (
                   <div
@@ -109,21 +129,21 @@ export default function ProductDetail({
       <section className="border-t border-paper-line">
         <div className="container-x py-16 md:py-20">
           <Reveal>
-            <div className="eyebrow">Capabilities</div>
-            <h2 className="display-2 mt-3">What it does.</h2>
+            <div className="eyebrow">{t("capabilitiesEyebrow")}</div>
+            <h2 className="display-2 mt-3">{t("capabilitiesTitle")}</h2>
           </Reveal>
           <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-paper-line bg-paper-line md:grid-cols-2">
-            {product.capabilities.map((c, i) => (
-              <Reveal key={c.title} delay={(i % 2) * 80}>
+            {product.capabilities.map((cap, i) => (
+              <Reveal key={cap.title} delay={(i % 2) * 80}>
                 <div className="h-full bg-paper-raised p-7">
                   <div className="font-mono text-sm text-accent">
                     0{i + 1}
                   </div>
                   <h3 className="mt-4 font-display text-xl text-ink">
-                    {c.title}
+                    {cap.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                    {c.desc}
+                    {cap.desc}
                   </p>
                 </div>
               </Reveal>
@@ -132,34 +152,54 @@ export default function ProductDetail({
         </div>
       </section>
 
-      {/* Space-ops visual (State Space Sovereignty model only) */}
-      {product.slug === "state-space-sovereignty-model" && <SpaceOps />}
+      {/* Product-specific immersive showcase */}
+      {product.slug === "state-space-sovereignty-model" ? (
+        <SpaceOps />
+      ) : (
+        (() => {
+          const Showcase = SHOWCASES[product.slug];
+          if (!Showcase) return null;
+          return (
+            <section className="border-t border-paper-line bg-obsidian text-paper-fixed">
+              <div className="container-x py-16 md:py-24">
+                <div className="eyebrow text-paper-fixed/50">
+                  {t("showcaseEyebrow")}
+                </div>
+                <h2 className="display-2 mt-3 text-paper-fixed">
+                  {t("showcaseTitle")}
+                </h2>
+                <div className="mt-10">
+                  <Showcase />
+                </div>
+              </div>
+            </section>
+          );
+        })()
+      )}
 
       {/* Methodology — Reinforcement Learning × Causality */}
-      <MethodologySection product={product} />
+      <MethodologySection product={product} locale={locale} />
 
-      {/* Footer CTA */}
-      <section className="border-t border-paper-line">
-        <div className="container-x flex flex-col items-center gap-6 py-20 text-center">
+      {/* Early access */}
+      <section
+        id="early-access"
+        className="scroll-mt-28 border-t border-paper-line"
+      >
+        <div className="container-x py-20 md:py-28">
           <Reveal>
-            <span className="badge-soon">● Continuously improving · Soon</span>
-            <h2 className="display-2 mt-6 max-w-2xl">
-              Want this model on your infrastructure?
-            </h2>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <a
-                href={`mailto:contact@aracana.ai?subject=Access%20request%20—%20${encodeURIComponent(
-                  product.name
-                )}`}
-                className="btn-dark"
-              >
-                Request early access
-              </a>
-              <Link href="/products" className="btn-ghost">
-                Other models
-              </Link>
-            </div>
+            <span className="badge-soon">{t("continuouslyImproving")}</span>
+            <h2 className="display-2 mt-6 max-w-2xl">{t("wantOnInfra")}</h2>
           </Reveal>
+          <div className="mt-10 grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+            <Reveal delay={120}>
+              <Link href="/products" className="btn-ghost">
+                {t("otherModels")}
+              </Link>
+            </Reveal>
+            <Reveal delay={160}>
+              <EarlyAccessForm product={product} />
+            </Reveal>
+          </div>
         </div>
       </section>
     </>

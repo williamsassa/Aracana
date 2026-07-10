@@ -1,45 +1,60 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { SectionHeading } from "@/components/Bits";
 import Reveal from "@/components/Reveal";
-import { ROLES, TEAMS } from "@/lib/content";
+import { getRoles, getTeams } from "@/lib/content";
 import { SITE } from "@/lib/site";
+import { buildAlternates } from "@/lib/seo";
+import type { Locale } from "@/i18n/config";
 
-export const metadata: Metadata = {
-  title: "Careers",
-  description:
-    "Join ARACANA AI. We are hiring researchers and engineers across Europe to build sovereign frontier AI.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "careers" });
+  return {
+    title: t("eyebrow"),
+    description: t("lead"),
+    alternates: buildAlternates("/careers"),
+  };
+}
 
-export default function CareersPage() {
+export default async function CareersPage({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "careers" });
+  const roles = getRoles(locale);
+  const teams = getTeams(locale);
+  const whyItems = t.raw("whyItems") as { title: string; desc: string }[];
+
   return (
     <>
       <section className="container-x py-20 md:py-28">
         <Reveal>
-          <div className="eyebrow">Careers</div>
-          <h1 className="display-1 mt-4 max-w-4xl">
-            Build the AI Europe can call its own.
-          </h1>
-          <p className="lead mt-6 max-w-2xl">
-            We are a focused team of researchers and engineers. We move fast,
-            publish our methods, and care deeply about sovereignty, safety and
-            real-world impact.
-          </p>
+          <div className="eyebrow">{t("eyebrow")}</div>
+          <h1 className="display-1 mt-4 max-w-4xl">{t("title")}</h1>
+          <p className="lead mt-6 max-w-2xl">{t("lead")}</p>
         </Reveal>
       </section>
 
       {/* Why join */}
       <section className="border-y border-paper-line bg-paper-soft">
         <div className="container-x grid gap-8 py-16 md:grid-cols-3">
-          {[
-            ["Frontier work", "Train and align models with reinforcement learning, causality and recursive self-improvement — at the edge of what's possible."],
-            ["Sovereign mission", "Your work strengthens European autonomy in the most strategic technology of the century."],
-            ["Real ownership", "Small team, high trust, direct impact. No layers between you and the model."],
-          ].map(([t, d], i) => (
-            <Reveal key={t} delay={i * 100}>
+          {whyItems.map((item, i) => (
+            <Reveal key={item.title} delay={i * 100}>
               <div>
                 <div className="font-mono text-sm text-accent">0{i + 1}</div>
-                <h3 className="mt-3 font-display text-xl text-ink">{t}</h3>
-                <p className="mt-2 text-sm text-ink-muted">{d}</p>
+                <h3 className="mt-3 font-display text-xl text-ink">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm text-ink-muted">{item.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -49,14 +64,14 @@ export default function CareersPage() {
       {/* Teams */}
       <section className="container-x py-16 md:py-20">
         <Reveal>
-          <SectionHeading eyebrow="Teams" title="Where you could fit." />
+          <SectionHeading eyebrow={t("teamsEyebrow")} title={t("teamsTitle")} />
           <div className="mt-8 flex flex-wrap gap-3">
-            {TEAMS.map((t) => (
+            {teams.map((team) => (
               <span
-                key={t}
+                key={team}
                 className="rounded-full border border-paper-line bg-paper-raised px-5 py-2 font-display text-sm text-ink-soft"
               >
-                {t}
+                {team}
               </span>
             ))}
           </div>
@@ -66,10 +81,10 @@ export default function CareersPage() {
       {/* Open roles */}
       <section className="container-x pb-24">
         <Reveal>
-          <SectionHeading eyebrow="Open roles" title="Now hiring." />
+          <SectionHeading eyebrow={t("rolesEyebrow")} title={t("rolesTitle")} />
         </Reveal>
         <div className="mt-10 overflow-hidden rounded-2xl border border-paper-line">
-          {ROLES.map((r, i) => (
+          {roles.map((r, i) => (
             <Reveal key={r.title} delay={(i % 3) * 60}>
               <a
                 href={`mailto:${SITE.email}?subject=${encodeURIComponent(
@@ -83,7 +98,7 @@ export default function CareersPage() {
                   {r.team} · {r.type}
                 </div>
                 <span className="font-mono text-[12px] uppercase tracking-wide2 text-ink transition-transform group-hover:translate-x-1">
-                  Apply →
+                  {t("apply")}
                 </span>
               </a>
             </Reveal>
@@ -91,12 +106,12 @@ export default function CareersPage() {
         </div>
         <Reveal>
           <p className="mt-8 text-sm text-ink-muted">
-            Don&apos;t see your role?{" "}
+            {t("noRolePrompt")}{" "}
             <a
               href={`mailto:${SITE.email}?subject=Open%20application`}
               className="link-underline"
             >
-              Send us an open application
+              {t("openApplication")}
             </a>
             .
           </p>

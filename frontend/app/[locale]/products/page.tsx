@@ -1,29 +1,46 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { StatusBadge } from "@/components/Bits";
 import Reveal from "@/components/Reveal";
-import { FRONT_PRODUCTS, BACKGROUND_PRODUCTS } from "@/lib/products";
+import { getFrontProducts, getBackgroundProducts } from "@/lib/products";
+import { buildAlternates } from "@/lib/seo";
+import type { Locale } from "@/i18n/config";
 
-export const metadata: Metadata = {
-  title: "Products",
-  description:
-    "ARACANA AI models: Generative Model, Coding Agent Model and State Space Sovereignty Model — trained with reinforcement learning and causality, in continuous improvement.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "products" });
+  return {
+    title: t("eyebrow"),
+    description: t("leadPrefix"),
+    alternates: buildAlternates("/products"),
+  };
+}
 
-export default function ProductsPage() {
+export default async function ProductsPage({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "products" });
+  const frontProducts = getFrontProducts(locale);
+  const backgroundProducts = getBackgroundProducts(locale);
+
   return (
     <>
       <section className="container-x py-20 md:py-28">
         <Reveal>
-          <div className="eyebrow">Products</div>
-          <h1 className="display-1 mt-4 max-w-4xl">
-            Sovereign models, in continuous improvement.
-          </h1>
+          <div className="eyebrow">{t("eyebrow")}</div>
+          <h1 className="display-1 mt-4 max-w-4xl">{t("title")}</h1>
           <p className="lead mt-6 max-w-2xl">
-            Three flagship models lead the lineup, each trained with
-            reinforcement learning and causality, and deployable on European
-            infrastructure. All models are continuously improving — launching{" "}
-            <span className="text-accent">soon</span>.
+            {t("leadPrefix")} <span className="text-accent">{t("leadSuffix")}</span>.
           </p>
         </Reveal>
       </section>
@@ -31,7 +48,7 @@ export default function ProductsPage() {
       {/* Flagship products */}
       <section className="container-x pb-8">
         <div className="grid gap-5 lg:grid-cols-3">
-          {FRONT_PRODUCTS.map((p, i) => (
+          {frontProducts.map((p, i) => (
             <Reveal key={p.slug} delay={i * 90}>
               <Link
                 href={`/products/${p.slug}`}
@@ -53,7 +70,7 @@ export default function ProductsPage() {
                   {p.summary}
                 </p>
                 <div className="mt-8 font-mono text-[12px] uppercase tracking-wide2 text-ink">
-                  View model →
+                  {t("viewModel")}
                 </div>
               </Link>
             </Reveal>
@@ -65,14 +82,11 @@ export default function ProductsPage() {
       <section className="container-x py-16 md:py-20">
         <Reveal>
           <div className="hairline mb-10" />
-          <div className="eyebrow">Also in development</div>
-          <p className="mt-3 max-w-2xl text-ink-muted">
-            Two further systems run in the background and power the rest of the
-            stack. They are in active development.
-          </p>
+          <div className="eyebrow">{t("alsoEyebrow")}</div>
+          <p className="mt-3 max-w-2xl text-ink-muted">{t("alsoLead")}</p>
         </Reveal>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {BACKGROUND_PRODUCTS.map((p, i) => (
+          {backgroundProducts.map((p, i) => (
             <Reveal key={p.slug} delay={i * 90}>
               <Link
                 href={`/products/${p.slug}`}
@@ -96,17 +110,16 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <section className="border-t border-paper-line bg-ink">
-        <div className="container-x py-16 text-center text-paper">
-          <p className="font-mono text-[12px] uppercase tracking-wide2 text-paper/50">
-            Every model is driven by
+      <section className="border-t border-paper-line bg-obsidian">
+        <div className="container-x py-16 text-center text-paper-fixed">
+          <p className="font-mono text-[12px] uppercase tracking-wide2 text-paper-fixed/50">
+            {t("everyModelDriven")}
           </p>
-          <h2 className="display-2 mt-3 text-paper">
-            Reinforcement Learning × Causality
+          <h2 className="display-2 mt-3 text-paper-fixed">
+            {t("approachSubtitle")}
           </h2>
-          <p className="lead mx-auto mt-4 max-w-xl text-paper/60">
-            Open any model to see how our approach shapes it — the learning
-            signals, the loop, and a concrete example.
+          <p className="lead mx-auto mt-4 max-w-xl text-paper-fixed/60">
+            {t("approachLead")}
           </p>
         </div>
       </section>

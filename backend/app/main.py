@@ -7,6 +7,7 @@ early access). Single source of truth lives in app/data.py for V1.
 
 from __future__ import annotations
 
+import os
 from datetime import datetime, timezone
 
 from fastapi import FastAPI, HTTPException
@@ -34,15 +35,24 @@ app = FastAPI(
 )
 
 # CORS: allow the Next.js frontend (web/desktop/mobile shells) to call us.
+# `next dev` actually serves on :3030 (see frontend/package.json), so that
+# port must be allowed alongside :3000 for local development to work.
+DEFAULT_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3030",
+    "http://127.0.0.1:3030",
+    "tauri://localhost",
+    "capacitor://localhost",
+    "https://aracana.ai",
+]
+EXTRA_ORIGINS = [
+    o.strip() for o in os.getenv("CORS_EXTRA_ORIGINS", "").split(",") if o.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "tauri://localhost",
-        "https://aracana.ai",
-        "capacitor://localhost",
-    ],
+    allow_origins=DEFAULT_ORIGINS + EXTRA_ORIGINS,
     allow_origin_regex=r"https://.*\.aracana\.ai",
     allow_methods=["*"],
     allow_headers=["*"],

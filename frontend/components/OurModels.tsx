@@ -1,15 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { PRODUCTS } from "@/lib/products";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { StatusBadge } from "./Bits";
+import { getProducts } from "@/lib/products";
+import type { Locale } from "@/i18n/config";
 
 /**
  * "Our Models" — Palantir-software-style showcase.
  * Left: short description + index. Centre: a sticky device preview that
  * swaps to the model currently in view. Right: the model's giant codename.
  */
-export default function OurModels() {
+export default function OurModels({ locale }: { locale: Locale }) {
+  const t = useTranslations("common");
+  const home = useTranslations("home");
+  const PRODUCTS = getProducts(locale);
   const [active, setActive] = useState(0);
   const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -32,10 +38,8 @@ export default function OurModels() {
   return (
     <section className="border-t border-paper-line bg-paper">
       <div className="container-x pt-20 md:pt-28">
-        <div className="eyebrow">Our Models</div>
-        <h2 className="display-2 mt-3 max-w-3xl">
-          Five models. One sovereign platform.
-        </h2>
+        <div className="eyebrow">{home("ourModelsEyebrow")}</div>
+        <h2 className="display-2 mt-3 max-w-3xl">{home("ourModelsTitle")}</h2>
       </div>
 
       {/* Desktop: sticky centre preview + scrolling rows */}
@@ -67,19 +71,13 @@ export default function OurModels() {
                     <span className="font-mono text-sm text-ink-faint">
                       /0.{i + 1}
                     </span>
-                    <span
-                      className={
-                        p.status === "soon" ? "badge-soon" : "badge-dev"
-                      }
-                    >
-                      {p.status === "soon" ? "● Soon" : "In development"}
-                    </span>
+                    <StatusBadge status={p.status} />
                   </div>
                   <Link
                     href={`/products/${p.slug}`}
                     className="mt-6 inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-wide2 text-ink hover:text-accent"
                   >
-                    Explore {p.name} <span>→</span>
+                    {t("explore", { name: p.name })} <span>→</span>
                   </Link>
                 </div>
               </div>
@@ -146,9 +144,7 @@ export default function OurModels() {
               <span className="font-mono text-sm text-ink-faint">
                 /0.{i + 1}
               </span>
-              <span className={p.status === "soon" ? "badge-soon" : "badge-dev"}>
-                {p.status === "soon" ? "● Soon" : "In development"}
-              </span>
+              <StatusBadge status={p.status} />
             </div>
             <div
               className="logo-word mt-5 leading-[0.9] tracking-tightest text-ink"
@@ -171,7 +167,7 @@ export default function OurModels() {
 
       <div className="container-x pb-20 pt-12 md:pb-28">
         <Link href="/products" className="btn-dark">
-          All models
+          {home("allModels")}
         </Link>
       </div>
     </section>

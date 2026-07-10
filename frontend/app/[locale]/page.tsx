@@ -1,41 +1,52 @@
-import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { HeroWordmark } from "@/components/Logo";
-import { Orb, SectionHeading, ArrowLink } from "@/components/Bits";
+import { SectionHeading, ArrowLink } from "@/components/Bits";
+import HeroSignal from "@/components/HeroSignal";
 import Reveal from "@/components/Reveal";
 import OurModels from "@/components/OurModels";
-import { SOLUTIONS, RESEARCH } from "@/lib/content";
-import { SITE } from "@/lib/site";
+import { getSolutions, getResearch } from "@/lib/content";
+import { TAGLINE } from "@/lib/site";
+import type { Locale } from "@/i18n/config";
 
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "home" });
+  const c = await getTranslations({ locale, namespace: "common" });
+  const solutions = getSolutions(locale);
+  const research = getResearch(locale);
+
   return (
     <>
       {/* ───────── Hero ───────── */}
       <section className="relative overflow-hidden">
         <div className="dot-grid absolute inset-0 -z-10 opacity-60" />
         <div className="container-x relative flex min-h-[78vh] flex-col items-center justify-center py-24 text-center">
-          <Orb className="absolute -top-6 right-[6%] hidden h-40 w-40 md:block" />
-          <Orb className="absolute bottom-10 left-[4%] hidden h-24 w-24 opacity-70 md:block" />
+          <HeroSignal className="absolute inset-0 -z-[1] hidden md:block" />
 
           <Reveal>
             <HeroWordmark />
           </Reveal>
           <Reveal delay={120}>
-            <p className="lead mt-8 max-w-2xl">{SITE.tagline}</p>
+            <p className="lead mt-8 max-w-2xl">{TAGLINE[locale]}</p>
           </Reveal>
           <Reveal delay={220}>
             <p className="mt-3 max-w-xl text-sm text-ink-muted">
-              AI for the sovereignty of European states and the expansion of
-              artificial intelligence across industry, finance and everyday
-              life.
+              {t("heroSubtitle")}
             </p>
           </Reveal>
           <Reveal delay={320}>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Link href="/products" className="btn-dark">
-                Explore Products
+                {c("exploreProducts")}
               </Link>
               <Link href="/research" className="btn-ghost">
-                Our Research
+                {c("ourResearch")}
               </Link>
             </div>
           </Reveal>
@@ -45,23 +56,23 @@ export default function Home() {
       {/* ───────── Mission strip ───────── */}
       <section className="border-y border-paper-line bg-paper-soft">
         <div className="container-x grid gap-8 py-12 md:grid-cols-3">
-          {[
-            ["Sovereign by design", "Trained, hosted and audited on European infrastructure."],
-            ["Frontier capability", "Recursive self-improvement under human oversight."],
-            ["Real-world useful", "From industry and finance to everyday tasks."],
-          ].map(([t, d], i) => (
-            <Reveal key={t} delay={i * 100}>
-              <div className="flex gap-4">
-                <span className="font-mono text-sm text-accent">
-                  0{i + 1}
-                </span>
-                <div>
-                  <h3 className="font-display text-lg text-ink">{t}</h3>
-                  <p className="mt-1 text-sm text-ink-muted">{d}</p>
+          {t.raw("missionItems").map(
+            (item: { title: string; desc: string }, i: number) => (
+              <Reveal key={item.title} delay={i * 100}>
+                <div className="flex gap-4">
+                  <span className="font-mono text-sm text-accent">
+                    0{i + 1}
+                  </span>
+                  <div>
+                    <h3 className="font-display text-lg text-ink">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1 text-sm text-ink-muted">{item.desc}</p>
+                  </div>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            )
+          )}
         </div>
       </section>
 
@@ -69,13 +80,13 @@ export default function Home() {
       <section className="container-x py-24 md:py-32">
         <Reveal>
           <SectionHeading
-            eyebrow="Solutions"
-            title="Six domains, one sovereign stack."
-            intro="ARACANA AI builds across the frontier — from generation to autonomous science to state defense."
+            eyebrow={t("solutionsEyebrow")}
+            title={t("solutionsTitle")}
+            intro={t("solutionsIntro")}
           />
         </Reveal>
         <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-paper-line bg-paper-line md:grid-cols-2 lg:grid-cols-3">
-          {SOLUTIONS.map((s, i) => (
+          {solutions.map((s, i) => (
             <Reveal key={s.id} delay={(i % 3) * 80}>
               <Link
                 href={`/solutions#${s.id}`}
@@ -100,24 +111,24 @@ export default function Home() {
           ))}
         </div>
         <div className="mt-8">
-          <ArrowLink href="/solutions">All solutions</ArrowLink>
+          <ArrowLink href="/solutions">{c("allSolutions")}</ArrowLink>
         </div>
       </section>
 
       {/* ───────── Our Models (Palantir-style showcase) ───────── */}
-      <OurModels />
+      <OurModels locale={locale} />
 
       {/* ───────── Research ───────── */}
       <section className="container-x py-24 md:py-32">
         <Reveal>
           <SectionHeading
-            eyebrow="Research"
-            title="Where we push the frontier."
-            intro="Three long-horizon research axes underpin everything we build."
+            eyebrow={t("researchEyebrow")}
+            title={t("researchTitle")}
+            intro={t("researchIntro")}
           />
         </Reveal>
         <div className="mt-14 divide-y divide-paper-line border-y border-paper-line">
-          {RESEARCH.map((r, i) => (
+          {research.map((r, i) => (
             <Reveal key={r.id} delay={i * 80}>
               <Link
                 href={`/research#${r.id}`}
@@ -147,22 +158,18 @@ export default function Home() {
       <section className="border-t border-paper-line bg-paper-soft">
         <div className="container-x flex flex-col items-center gap-6 py-24 text-center">
           <Reveal>
-            <h2 className="display-2 max-w-2xl">
-              Build sovereign frontier AI with us.
-            </h2>
+            <h2 className="display-2 max-w-2xl">{t("ctaTitle")}</h2>
           </Reveal>
           <Reveal delay={120}>
-            <p className="lead max-w-xl">
-              We are hiring researchers and engineers across Europe.
-            </p>
+            <p className="lead max-w-xl">{t("ctaSubtitle")}</p>
           </Reveal>
           <Reveal delay={220}>
             <div className="flex flex-wrap justify-center gap-3">
               <Link href="/careers" className="btn-dark">
-                Open Roles
+                {c("openRoles")}
               </Link>
               <Link href="/about" className="btn-ghost">
-                About ARACANA
+                {c("aboutAracana")}
               </Link>
             </div>
           </Reveal>

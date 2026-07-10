@@ -1,8 +1,14 @@
-import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Wordmark } from "./Logo";
-import { SITE, NAV } from "@/lib/site";
+import { SITE, TAGLINE, getNav } from "@/lib/site";
+import type { Locale } from "@/i18n/config";
 
-export default function Footer() {
+export default async function Footer() {
+  const locale = (await getLocale()) as Locale;
+  const t = await getTranslations({ locale, namespace: "footer" });
+  const NAV = getNav(locale);
+
   return (
     <footer className="border-t border-paper-line bg-paper-soft">
       <div className="container-x py-16">
@@ -10,8 +16,7 @@ export default function Footer() {
           <div>
             <Wordmark size="text-2xl" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-muted">
-              {SITE.tagline}. Frontier AI for European sovereignty across
-              industry, finance and everyday life.
+              {TAGLINE[locale]}. {t("taglineSuffix")}
             </p>
           </div>
 
@@ -24,7 +29,7 @@ export default function Footer() {
                     href={col.href}
                     className="text-sm text-ink-soft transition-colors hover:text-accent"
                   >
-                    Overview
+                    {t("overview")}
                   </Link>
                 </li>
                 {col.children?.map((c) => (
@@ -48,10 +53,10 @@ export default function Footer() {
               © {SITE.year} {SITE.legalName}
             </span>
             <Link href="/careers" className="hover:text-ink">
-              Careers
+              {t("careers")}
             </Link>
             <Link href="/about" className="hover:text-ink">
-              About Us
+              {t("about")}
             </Link>
             <a href={`mailto:${SITE.email}`} className="hover:text-ink">
               {SITE.email}

@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,23 +10,42 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Theme-aware tokens — driven by CSS variables (see globals.css :root/.dark)
+        // so light/dark can swap without touching component classes.
         ink: {
-          DEFAULT: "#0A0A0B",
-          soft: "#16161A",
-          muted: "#6A6458",
-          faint: "#A39B86",
+          DEFAULT: "rgb(var(--ink) / <alpha-value>)",
+          soft: "rgb(var(--ink-soft) / <alpha-value>)",
+          muted: "rgb(var(--ink-muted) / <alpha-value>)",
+          faint: "rgb(var(--ink-faint) / <alpha-value>)",
         },
-        // Warm beige paper system (replaces pure white)
         paper: {
-          DEFAULT: "#EFE9DB", // base beige background
-          soft: "#E6DECC", // deeper beige — alternating sections
-          raised: "#F7F2E8", // warm near-white — cards/surfaces
-          line: "#D7CDB8", // hairlines / borders
+          DEFAULT: "rgb(var(--paper) / <alpha-value>)",
+          soft: "rgb(var(--paper-soft) / <alpha-value>)",
+          raised: "rgb(var(--paper-raised) / <alpha-value>)",
+          line: "rgb(var(--paper-line) / <alpha-value>)",
         },
         accent: {
-          DEFAULT: "#E5121A",
-          soft: "#FF4D4D",
-          deep: "#B00C12",
+          DEFAULT: "rgb(var(--accent) / <alpha-value>)",
+          soft: "rgb(var(--accent-soft) / <alpha-value>)",
+          deep: "rgb(var(--accent-deep) / <alpha-value>)",
+        },
+        // Fixed, non-theme-aware tokens for sections that stay a deliberately
+        // dark "console" band in both light and dark mode (SpaceOps, Methodology).
+        // Literal hex (not CSS-var-driven) so Tailwind's opacity modifiers
+        // (e.g. text-paper-fixed/60) keep working regardless of active theme.
+        obsidian: "#0A0A0B",
+        "paper-fixed": "#EFE9DB",
+        // Brand spectrum — used sparingly (orbits, active state, showcases),
+        // reserved for dark mode per the "Operational Intelligence System" direction.
+        spectrum: {
+          red: "#E5121A",
+          orange: "#FF7A1A",
+          yellow: "#FFC93C",
+          green: "#28C76F",
+          cyan: "#22D3EE",
+          blue: "#3B82F6",
+          violet: "#8B5CF6",
+          magenta: "#E5389B",
         },
       },
       fontFamily: {

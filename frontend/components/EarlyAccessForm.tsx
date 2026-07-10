@@ -2,33 +2,41 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { sendContact } from "@/lib/api";
+import { requestEarlyAccess } from "@/lib/api";
 import { SITE } from "@/lib/site";
 import Field from "./FormField";
+import type { Product } from "@/lib/products";
 
-type State = "idle" | "sending" | "done" | "error";
+type State = "idle" | "invalid" | "sending" | "done" | "error";
 
-export default function ContactForm() {
-  const t = useTranslations("contactForm");
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export default function EarlyAccessForm({ product }: { product: Product }) {
+  const t = useTranslations("earlyAccessForm");
   const [state, setState] = useState<State>("idle");
   const [msg, setMsg] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setState("sending");
     const fd = new FormData(e.currentTarget);
+    const email = String(fd.get("email") || "").trim();
+
+    if (!EMAIL_RE.test(email)) {
+      setState("invalid");
+      return;
+    }
+
+    setState("sending");
     try {
-      const ack = await sendContact({
-        name: String(fd.get("name") || ""),
-        email: String(fd.get("email") || ""),
+      const ack = await requestEarlyAccess({
+        email,
+        product_slug: product.slug,
         organization: String(fd.get("organization") || "") || undefined,
-        subject: String(fd.get("subject") || "General enquiry"),
-        message: String(fd.get("message") || ""),
+        use_case: String(fd.get("use_case") || "") || undefined,
       });
       setMsg(ack.message);
       setState("done");
     } catch {
-      // Backend offline? Fall back gracefully to email so the user is never stuck.
       setMsg(t("errorFallback", { email: SITE.email }));
       setState("error");
     }
@@ -54,19 +62,22 @@ export default function ContactForm() {
       className="rounded-2xl border border-paper-line bg-paper-raised p-6 md:p-8"
     >
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field name="name" label={t("name")} required />
         <Field name="email" label={t("email")} type="email" required />
-        <Field name="organization" label={t("organization")} />
-        <Field name="subject" label={t("subject")} required />
+        <Field name="organization" label={t("organization")} maxLength={160} />
       </div>
       <Field
-        name="message"
-        label={t("message")}
+        name="use_case"
+        label={t("useCase")}
         as="textarea"
-        rows={5}
-        required
+        rows={4}
+        maxLength={2000}
       />
 
+      {state === "invalid" && (
+        <p className="mt-4 text-sm text-accent" role="status" aria-live="polite">
+          {t("invalid")}
+        </p>
+      )}
       {state === "error" && (
         <p className="mt-4 text-sm text-accent" role="status" aria-live="polite">
           {msg}
@@ -78,7 +89,7 @@ export default function ContactForm() {
         disabled={state === "sending"}
         className="btn-dark mt-6 w-full sm:w-auto"
       >
-        {state === "sending" ? t("sending") : t("send")}
+        {state === "sending" ? t("sending") : t("submit")}
       </button>
     </form>
   );

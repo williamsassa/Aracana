@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "titleDefault": "ARACANA AI — Sovereign Frontier AI for Europe",
+    "titleTemplate": "%s — ARACANA AI",
+    "description": "ARACANA AI builds frontier artificial intelligence for European sovereignty and the expansion of AI across industry, finance and everyday life.",
+    "ogDescription": "Frontier AI for European sovereignty across industry, finance and everyday life."
+  },
+  "common": {
+    "exploreProducts": "Explore Products",
+    "ourResearch": "Our Research",
+    "seeOurApproach": "See our approach",
+    "allProducts": "All products",
+    "allSolutions": "All solutions",
+    "backHome": "Back home",
+    "openRoles": "Open Roles",
+    "aboutAracana": "About ARACANA",
+    "explore": "Explore {name}"
+  },
+  "header": {
+    "menuToggle": "Toggle menu"
+  },
+  "footer": {
+    "taglineSuffix": "Frontier AI for European sovereignty across industry, finance and everyday life.",
+    "overview": "Overview",
+    "careers": "Careers",
+    "about": "About Us"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggleLabel": "Switch appearance, current: {mode}"
+  },
+  "language": {
+    "switchLabel": "Switch language"
+  },
+  "notFound": {
+    "title": "Page not found.",
+    "body": "The page you are looking for has drifted off the frontier."
+  },
+  "home": {
+    "heroSubtitle": "AI for the sovereignty of European states and the expansion of artificial intelligence across industry, finance and everyday life.",
+    "missionItems": [
+      { "title": "Sovereign by design", "desc": "Trained, hosted and audited on European infrastructure." },
+      { "title": "Frontier capability", "desc": "Recursive self-improvement under human oversight." },
+      { "title": "Real-world useful", "desc": "From industry and finance to everyday tasks." }
+    ],
+    "solutionsEyebrow": "Solutions",
+    "solutionsTitle": "Six domains, one sovereign stack.",
+    "solutionsIntro": "ARACANA AI builds across the frontier — from generation to autonomous science to state defense.",
+    "researchEyebrow": "Research",
+    "researchTitle": "Where we push the frontier.",
+    "researchIntro": "Three long-horizon research axes underpin everything we build.",
+    "ctaTitle": "Build sovereign frontier AI with us.",
+    "ctaSubtitle": "We are hiring researchers and engineers across Europe.",
+    "ourModelsEyebrow": "Our Models",
+    "ourModelsTitle": "Five models. One sovereign platform.",
+    "allModels": "All models"
+  },
+  "about": {
+    "eyebrow": "About Us",
+    "title": "A European AI company, sovereign by design.",
+    "lead": "ARACANA AI builds frontier artificial intelligence for the sovereignty of European states and for the expansion of AI across industrial professions, finance and the tasks of everyday life.",
+    "missionTitle": "Our mission",
+    "missionParagraphs": [
+      "The most strategic technology of the century should not be something Europe merely rents. We build models that European states and enterprises can own, audit, host and govern entirely on their own infrastructure.",
+      "We pair that sovereignty with genuine frontier capability — recursive self-improvement, mechanism-informed multimodal reasoning — kept measurable, reversible and under human control at every step.",
+      "And we hold ourselves to a simple test: our work is judged by the value it creates outside the lab, in industry, in finance, and in the everyday."
+    ],
+    "principlesEyebrow": "Principles",
+    "principlesTitle": "What we believe.",
+    "factsHeadquarters": "Headquarters",
+    "factsFounded": "Founded",
+    "factsFoundedValue": "2026",
+    "factsFocus": "Focus",
+    "factsFocusValue": "Sovereign frontier AI",
+    "contactEyebrow": "Contact",
+    "contactTitle": "Let's talk.",
+    "contactLead": "For partnerships, sovereign deployments or press.",
+    "joinPrompt": "Looking to join? See open roles →"
+  },
+  "careers": {
+    "eyebrow": "Careers",
+    "title": "Build the AI Europe can call its own.",
+    "lead": "We are a focused team of researchers and engineers. We move fast, publish our methods, and care deeply about sovereignty, safety and real-world impact.",
+    "whyItems": [
+      { "title": "Frontier work", "desc": "Train and align models with reinforcement learning, causality and recursive self-improvement — at the edge of what's possible." },
+      { "title": "Sovereign mission", "desc": "Your work strengthens European autonomy in the most strategic technology of the century." },
+      { "title": "Real ownership", "desc": "Small team, high trust, direct impact. No layers between you and the model." }
+    ],
+    "teamsEyebrow": "Teams",
+    "teamsTitle": "Where you could fit.",
+    "rolesEyebrow": "Open roles",
+    "rolesTitle": "Now hiring.",
+    "apply": "Apply →",
+    "noRolePrompt": "Don't see your role?",
+    "openApplication": "Send us an open application"
+  },
+  "research": {
+    "eyebrow": "Research",
+    "title": "Pushing the frontier, under sovereign control.",
+    "lead": "Our research turns three long-horizon bets into the models behind every ARACANA product. Two forces drive everything we train: reinforcement learning and causality.",
+    "approachEyebrow": "Approach",
+    "approachTitle": "Reinforcement Learning × Causality.",
+    "approachIntro": "Reinforcement learning lets our models improve from outcomes; causality lets them reason about cause and effect rather than correlation. Together they make models that are capable, robust and explainable. See how it applies on any product page.",
+    "loopEyebrow": "The research loop",
+    "loopTitle": "How a research bet becomes a shipped model."
+  },
+  "solutions": {
+    "eyebrow": "Solutions",
+    "title": "Frontier AI, applied where it matters.",
+    "lead": "Six domains, one sovereign stack — engineered for European industry, finance, science, space and defense.",
+    "ctaTitle": "See the models behind the solutions."
+  },
+  "products": {
+    "eyebrow": "Products",
+    "title": "Sovereign models, in continuous improvement.",
+    "leadPrefix": "Three flagship models lead the lineup, each trained with reinforcement learning and causality, and deployable on European infrastructure. All models are continuously improving — launching",
+    "leadSuffix": "soon",
+    "viewModel": "View model →",
+    "alsoEyebrow": "Also in development",
+    "alsoLead": "Two further systems run in the background and power the rest of the stack. They are in active development.",
+    "everyModelDriven": "Every model is driven by",
+    "approachSubtitle": "Reinforcement Learning × Causality",
+    "approachLead": "Open any model to see how our approach shapes it — the learning signals, the loop, and a concrete example."
+  },
+  "productDetail": {
+    "allProductsBack": "← All products",
+    "seeApproach": "See our approach",
+    "requestEarlyAccess": "Request early access",
+    "overview": "Overview",
+    "specifications": "Specifications",
+    "capabilitiesEyebrow": "Capabilities",
+    "capabilitiesTitle": "What it does.",
+    "showcaseEyebrow": "In action",
+    "showcaseTitle": "See it work.",
+    "continuouslyImproving": "● Continuously improving · Soon",
+    "wantOnInfra": "Want this model on your infrastructure?",
+    "otherModels": "Other models"
+  },
+  "methodology": {
+    "learningSignalsFor": "Learning signals for {name}",
+    "signal": "Signal",
+    "weight": "Weight",
+    "whatItRewards": "What it rewards"
+  },
+  "contactForm": {
+    "name": "Name",
+    "email": "Email",
+    "organization": "Organization",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send message",
+    "sending": "Sending…",
+    "sentTitle": "Message sent",
+    "errorFallback": "Our API is unreachable right now — please email us directly at {email}."
+  },
+  "earlyAccessForm": {
+    "email": "Email",
+    "organization": "Organization (optional)",
+    "useCase": "What would you use it for? (optional)",
+    "submit": "Request early access",
+    "sending": "Sending…",
+    "sentTitle": "Request received",
+    "invalid": "Please enter a valid email address.",
+    "errorFallback": "Our API is unreachable right now — please email us directly at {email}."
+  }
+}

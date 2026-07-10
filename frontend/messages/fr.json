@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "titleDefault": "ARACANA AI — IA de pointe souveraine pour l'Europe",
+    "titleTemplate": "%s — ARACANA AI",
+    "description": "ARACANA AI construit une intelligence artificielle de pointe pour la souveraineté des États européens et l'expansion de l'IA dans l'industrie, la finance et la vie quotidienne.",
+    "ogDescription": "Une IA de pointe pour la souveraineté européenne dans l'industrie, la finance et la vie quotidienne."
+  },
+  "common": {
+    "exploreProducts": "Découvrir les produits",
+    "ourResearch": "Notre recherche",
+    "seeOurApproach": "Voir notre approche",
+    "allProducts": "Tous les produits",
+    "allSolutions": "Toutes les solutions",
+    "backHome": "Retour à l'accueil",
+    "openRoles": "Postes ouverts",
+    "aboutAracana": "À propos d'ARACANA",
+    "explore": "Découvrir {name}"
+  },
+  "header": {
+    "menuToggle": "Afficher/masquer le menu"
+  },
+  "footer": {
+    "taglineSuffix": "Une IA de pointe pour la souveraineté européenne dans l'industrie, la finance et la vie quotidienne.",
+    "overview": "Aperçu",
+    "careers": "Carrières",
+    "about": "À propos"
+  },
+  "theme": {
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système",
+    "toggleLabel": "Changer l'apparence, actuel : {mode}"
+  },
+  "language": {
+    "switchLabel": "Changer de langue"
+  },
+  "notFound": {
+    "title": "Page introuvable.",
+    "body": "La page que vous cherchez s'est perdue au-delà de la frontière."
+  },
+  "home": {
+    "heroSubtitle": "Une IA pour la souveraineté des États européens et l'expansion de l'intelligence artificielle dans l'industrie, la finance et la vie quotidienne.",
+    "missionItems": [
+      { "title": "Souveraine par conception", "desc": "Entraînée, hébergée et auditée sur une infrastructure européenne." },
+      { "title": "Capacité de pointe", "desc": "Auto-amélioration récursive sous supervision humaine." },
+      { "title": "Utile dans le monde réel", "desc": "De l'industrie et la finance aux tâches quotidiennes." }
+    ],
+    "solutionsEyebrow": "Solutions",
+    "solutionsTitle": "Six domaines, une pile souveraine.",
+    "solutionsIntro": "ARACANA AI construit sur toute la frontière — de la génération à la science autonome jusqu'à la défense étatique.",
+    "researchEyebrow": "Recherche",
+    "researchTitle": "Là où nous repoussons la frontière.",
+    "researchIntro": "Trois axes de recherche à long horizon sous-tendent tout ce que nous construisons.",
+    "ctaTitle": "Construisez une IA de pointe souveraine avec nous.",
+    "ctaSubtitle": "Nous recrutons des chercheurs et des ingénieurs à travers l'Europe.",
+    "ourModelsEyebrow": "Nos modèles",
+    "ourModelsTitle": "Cinq modèles. Une plateforme souveraine.",
+    "allModels": "Tous les modèles"
+  },
+  "about": {
+    "eyebrow": "À propos",
+    "title": "Une entreprise d'IA européenne, souveraine par conception.",
+    "lead": "ARACANA AI construit une intelligence artificielle de pointe pour la souveraineté des États européens et pour l'expansion de l'IA dans les métiers industriels, la finance et les tâches du quotidien.",
+    "missionTitle": "Notre mission",
+    "missionParagraphs": [
+      "La technologie la plus stratégique du siècle ne devrait pas être quelque chose que l'Europe se contente de louer. Nous construisons des modèles que les États et entreprises européens peuvent posséder, auditer, héberger et gouverner entièrement sur leur propre infrastructure.",
+      "Nous associons cette souveraineté à une véritable capacité de pointe — auto-amélioration récursive, raisonnement multimodal informé par les mécanismes — maintenue mesurable, réversible et sous contrôle humain à chaque étape.",
+      "Et nous nous imposons un test simple : notre travail se juge à la valeur qu'il crée en dehors du laboratoire, dans l'industrie, la finance et le quotidien."
+    ],
+    "principlesEyebrow": "Principes",
+    "principlesTitle": "Ce en quoi nous croyons.",
+    "factsHeadquarters": "Siège",
+    "factsFounded": "Fondée en",
+    "factsFoundedValue": "2026",
+    "factsFocus": "Mission",
+    "factsFocusValue": "IA de pointe souveraine",
+    "contactEyebrow": "Contact",
+    "contactTitle": "Discutons.",
+    "contactLead": "Pour les partenariats, déploiements souverains ou la presse.",
+    "joinPrompt": "Envie de nous rejoindre ? Voir les postes ouverts →"
+  },
+  "careers": {
+    "eyebrow": "Carrières",
+    "title": "Construisez l'IA que l'Europe peut appeler la sienne.",
+    "lead": "Nous sommes une équipe resserrée de chercheurs et d'ingénieurs. Nous avançons vite, publions nos méthodes, et tenons profondément à la souveraineté, à la sécurité et à l'impact réel.",
+    "whyItems": [
+      { "title": "Travail de pointe", "desc": "Entraîner et aligner des modèles avec l'apprentissage par renforcement, la causalité et l'auto-amélioration récursive — à la limite du possible." },
+      { "title": "Mission souveraine", "desc": "Votre travail renforce l'autonomie européenne dans la technologie la plus stratégique du siècle." },
+      { "title": "Une véritable appropriation", "desc": "Petite équipe, confiance élevée, impact direct. Aucune couche entre vous et le modèle." }
+    ],
+    "teamsEyebrow": "Équipes",
+    "teamsTitle": "Où vous pourriez vous intégrer.",
+    "rolesEyebrow": "Postes ouverts",
+    "rolesTitle": "Recrutement en cours.",
+    "apply": "Postuler →",
+    "noRolePrompt": "Vous ne voyez pas votre poste ?",
+    "openApplication": "Envoyez-nous une candidature spontanée"
+  },
+  "research": {
+    "eyebrow": "Recherche",
+    "title": "Repousser la frontière, sous contrôle souverain.",
+    "lead": "Notre recherche transforme trois paris à long horizon en modèles qui sous-tendent chaque produit ARACANA. Deux forces animent tout ce que nous entraînons : l'apprentissage par renforcement et la causalité.",
+    "approachEyebrow": "Approche",
+    "approachTitle": "Apprentissage par renforcement × Causalité.",
+    "approachIntro": "L'apprentissage par renforcement permet à nos modèles de progresser à partir de résultats ; la causalité leur permet de raisonner sur la cause et l'effet plutôt que sur la corrélation. Ensemble, ils produisent des modèles capables, robustes et explicables. Découvrez comment cela s'applique sur n'importe quelle page produit.",
+    "loopEyebrow": "La boucle de recherche",
+    "loopTitle": "Comment un pari de recherche devient un modèle livré."
+  },
+  "solutions": {
+    "eyebrow": "Solutions",
+    "title": "Une IA de pointe, appliquée là où c'est important.",
+    "lead": "Six domaines, une pile souveraine — conçue pour l'industrie, la finance, la science, l'espace et la défense européens.",
+    "ctaTitle": "Découvrez les modèles derrière les solutions."
+  },
+  "products": {
+    "eyebrow": "Produits",
+    "title": "Des modèles souverains, en amélioration continue.",
+    "leadPrefix": "Trois modèles phares mènent la gamme, chacun entraîné par apprentissage par renforcement et causalité, et déployable sur une infrastructure européenne. Tous les modèles sont en amélioration continue — lancement",
+    "leadSuffix": "bientôt",
+    "viewModel": "Voir le modèle →",
+    "alsoEyebrow": "Également en développement",
+    "alsoLead": "Deux autres systèmes fonctionnent en arrière-plan et alimentent le reste de la pile. Ils sont en développement actif.",
+    "everyModelDriven": "Chaque modèle est piloté par",
+    "approachSubtitle": "Apprentissage par renforcement × Causalité",
+    "approachLead": "Ouvrez n'importe quel modèle pour voir comment notre approche le façonne — les signaux d'apprentissage, la boucle, et un exemple concret."
+  },
+  "productDetail": {
+    "allProductsBack": "← Tous les produits",
+    "seeApproach": "Voir notre approche",
+    "requestEarlyAccess": "Demander un accès anticipé",
+    "overview": "Aperçu",
+    "specifications": "Spécifications",
+    "capabilitiesEyebrow": "Capacités",
+    "capabilitiesTitle": "Ce qu'il fait.",
+    "showcaseEyebrow": "En action",
+    "showcaseTitle": "Voir le modèle à l'œuvre.",
+    "continuouslyImproving": "● Amélioration continue · Bientôt",
+    "wantOnInfra": "Vous voulez ce modèle sur votre infrastructure ?",
+    "otherModels": "Autres modèles"
+  },
+  "methodology": {
+    "learningSignalsFor": "Signaux d'apprentissage pour {name}",
+    "signal": "Signal",
+    "weight": "Poids",
+    "whatItRewards": "Ce qu'il récompense"
+  },
+  "contactForm": {
+    "name": "Nom",
+    "email": "Email",
+    "organization": "Organisation",
+    "subject": "Sujet",
+    "message": "Message",
+    "send": "Envoyer le message",
+    "sending": "Envoi…",
+    "sentTitle": "Message envoyé",
+    "errorFallback": "Notre API est actuellement inaccessible — merci de nous écrire directement à {email}."
+  },
+  "earlyAccessForm": {
+    "email": "Email",
+    "organization": "Organisation (optionnel)",
+    "useCase": "Quel usage envisagez-vous ? (optionnel)",
+    "submit": "Demander un accès anticipé",
+    "sending": "Envoi…",
+    "sentTitle": "Demande reçue",
+    "invalid": "Merci de saisir une adresse email valide.",
+    "errorFallback": "Notre API est actuellement inaccessible — merci de nous écrire directement à {email}."
+  }
+}
