@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { StatusBadge } from "@/components/Bits";
 import Reveal from "@/components/Reveal";
+import ProductGlyph from "@/components/ProductGlyph";
 import { getFrontProducts, getBackgroundProducts } from "@/lib/products";
 import { buildAlternates } from "@/lib/seo";
 import type { Locale } from "@/i18n/config";
@@ -52,25 +53,30 @@ export default async function ProductsPage({
             <Reveal key={p.slug} delay={i * 90}>
               <Link
                 href={`/products/${p.slug}`}
-                className="card group flex h-full flex-col p-8"
+                className="card group flex h-full flex-col overflow-hidden"
               >
-                <div className="flex items-center justify-between">
-                  <StatusBadge status={p.status} />
-                  <span className="text-ink-faint transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
+                <div className="h-28 overflow-hidden bg-[#06070b]">
+                  <ProductGlyph slug={p.slug} live={false} />
                 </div>
-                <h2 className="mt-10 font-display text-2xl text-ink">
-                  {p.name}
-                </h2>
-                <p className="mt-1 font-mono text-[11px] uppercase tracking-wide2 text-accent">
-                  {p.modality}
-                </p>
-                <p className="mt-5 flex-1 text-sm leading-relaxed text-ink-muted">
-                  {p.summary}
-                </p>
-                <div className="mt-8 font-mono text-[12px] uppercase tracking-wide2 text-ink">
-                  {t("viewModel")}
+                <div className="flex flex-1 flex-col p-8">
+                  <div className="flex items-center justify-between">
+                    <StatusBadge status={p.status} />
+                    <span className="text-ink-faint transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
+                  </div>
+                  <h2 className="mt-6 font-display text-2xl text-ink">
+                    {p.name}
+                  </h2>
+                  <p className="mt-1 font-mono text-[11px] uppercase tracking-wide2 text-accent">
+                    {p.modality}
+                  </p>
+                  <p className="mt-5 flex-1 text-sm leading-relaxed text-ink-muted">
+                    {p.summary}
+                  </p>
+                  <div className="mt-8 font-mono text-[12px] uppercase tracking-wide2 text-ink">
+                    {t("viewModel")}
+                  </div>
                 </div>
               </Link>
             </Reveal>

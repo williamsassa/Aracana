@@ -8,11 +8,10 @@ export const RESEARCH_FR: ResearchAxis[] = [
     index: "01",
     title: "Auto-amélioration récursive",
     abstract:
-      "Nous étudions des systèmes d'IA capables d'améliorer leur propre processus d'apprentissage. Plutôt qu'un unique entraînement statique, un modèle ARACANA propose des ajustements à sa curation de données, à la conception de ses récompenses et à son calendrier d'optimisation, les évalue, puis intègre les changements gagnants dans l'itération suivante — une boucle contrôlée et auditable, et non un processus ouvert sans limites.",
+      "Nous étudions des systèmes d'IA capables d'améliorer leur propre processus d'apprentissage — en proposant des ajustements à la curation de données, à la conception des récompenses et à l'optimisation, en les évaluant, puis en intégrant les changements gagnants dans l'itération suivante. Une boucle contrôlée et auditable, pas un processus ouvert sans limites.",
     points: [
       "Curricula auto-curés : le modèle classe et repondère ses propres mélanges d'entraînement selon un indicateur mesurable de capacité et de sécurité.",
-      "Co-entraînement du modèle de récompense, où l'évaluateur et la politique progressent ensemble sous des garde-fous explicites et des points de contrôle humains.",
-      "Amélioration vérifiable : chaque auto-modification est journalisée, reproductible et soumise à des évaluations de contrôle avant d'être autorisée à persister.",
+      "Amélioration vérifiable : chaque auto-modification est journalisée, reproductible et soumise à des évaluations de contrôle avant de persister.",
     ],
     navBlurb: "Des systèmes qui affinent leurs propres boucles d'entraînement.",
   },
@@ -21,10 +20,9 @@ export const RESEARCH_FR: ResearchAxis[] = [
     index: "02",
     title: "IA multimodale informée par les mécanismes",
     abstract:
-      "Des modèles de pointe qui respectent les mécanismes du monde physique. Nous fusionnons langage, vision, signaux et simulation structurée afin qu'un modèle ARACANA raisonne à partir des lois d'un domaine — physique, chimie, biologie, contrôle — plutôt que sur de simples corrélations de surface dans le texte.",
+      "Des modèles de pointe qui respectent les mécanismes du monde physique — fusionnant langage, vision, signaux et simulation structurée pour raisonner à partir des lois d'un domaine plutôt que sur de simples corrélations de surface dans le texte.",
     points: [
       "Des a priori informés par la physique et la biologie injectés directement dans l'architecture et la fonction de perte.",
-      "Ancrage cross-modal : texte, image, vidéo, séries temporelles et structure moléculaire partagent un même espace latent.",
       "Des vérifications de cohérence mécanistique qui signalent les productions violant des lois de conservation connues ou des contraintes biologiques.",
     ],
     navBlurb: "Des modèles ancrés dans les mécanismes physiques.",
@@ -34,10 +32,9 @@ export const RESEARCH_FR: ResearchAxis[] = [
     index: "03",
     title: "Intégrité et souveraineté des États",
     abstract:
-      "Une IA qui renforce, plutôt qu'elle n'érode, l'autonomie des États européens. Nous concevons des modèles pouvant être entraînés, audités, hébergés et gouvernés entièrement au sein d'infrastructures souveraines, avec une traçabilité vérifiable et un déploiement sur site comme exigences de premier ordre.",
+      "Une IA qui renforce, plutôt qu'elle n'érode, l'autonomie des États européens — entraînée, auditée, hébergée et gouvernée entièrement au sein d'infrastructures souveraines, avec une traçabilité vérifiable et un déploiement sur site comme exigences de premier ordre.",
     points: [
       "Souverain par construction : entraînement, poids et inférence peuvent résider entièrement au sein d'une infrastructure nationale.",
-      "Traçabilité et auditabilité des données, de la lignée du modèle et de chaque décision prise par le système.",
       "Garanties de résilience et d'intégrité pour les déploiements à fonction critique en conditions adverses.",
     ],
     navBlurb: "Une IA alignée sur la souveraineté nationale et européenne.",

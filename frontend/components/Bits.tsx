@@ -72,7 +72,7 @@ export function Orb({ className = "" }: { className?: string }) {
               ry="38"
               transform="rotate(-28 100 100)"
               fill="none"
-              stroke="rgba(10,10,11,0.28)"
+              stroke="rgb(var(--ink) / 0.28)"
               strokeWidth="1"
             />
           </g>
@@ -84,12 +84,12 @@ export function Orb({ className = "" }: { className?: string }) {
               ry="38"
               transform="rotate(28 100 100)"
               fill="none"
-              stroke="rgba(10,10,11,0.18)"
+              stroke="rgb(var(--ink) / 0.18)"
               strokeWidth="1"
             />
           </g>
-          <circle cx="100" cy="100" r="14" fill="rgba(10,10,11,0.85)" />
-          <circle cx="166" cy="62" r="4.5" fill="#E5121A" className="animate-twinkle" />
+          <circle cx="100" cy="100" r="14" fill="rgb(var(--ink) / 0.85)" />
+          <circle cx="166" cy="62" r="4.5" fill="rgb(var(--accent))" className="animate-twinkle" />
         </svg>
       </div>
     </div>

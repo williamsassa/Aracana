@@ -36,5 +36,5 @@ export function useStageSequencer(stageCount: number, intervalMs = 2300) {
     return () => clearInterval(t);
   }, [visible, stageCount, intervalMs]);
 
-  return { ref, stage };
+  return { ref, stage, visible };
 }

@@ -11,7 +11,7 @@ import GenerativeReasoningShowcase from "@/components/showcase/GenerativeReasoni
 import SwarmShowcase from "@/components/showcase/SwarmShowcase";
 import CurieShowcase from "@/components/showcase/CurieShowcase";
 import EarlyAccessForm from "@/components/EarlyAccessForm";
-import { PRODUCT_SLUGS, getProduct } from "@/lib/products";
+import { PRODUCT_SLUGS, getProduct, getProducts } from "@/lib/products";
 import { locales, type Locale } from "@/i18n/config";
 import { buildAlternates } from "@/lib/seo";
 
@@ -57,6 +57,12 @@ export default async function ProductDetail({
   const t = await getTranslations({ locale, namespace: "productDetail" });
   const c = await getTranslations({ locale, namespace: "common" });
 
+  const Showcase = SHOWCASES[product.slug];
+  const related = getProducts(locale)
+    .filter((p) => p.slug !== product.slug)
+    .sort((a, b) => Number(a.background) - Number(b.background))
+    .slice(0, 3);
+
   return (
     <>
       {/* Hero */}
@@ -90,61 +96,68 @@ export default async function ProductDetail({
         </div>
       </section>
 
-      {/* Overview + specs */}
-      <section className="container-x py-16 md:py-24">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_0.6fr]">
-          <Reveal>
-            <div className="eyebrow">{t("overview")}</div>
-            <div className="mt-5 space-y-5">
-              {product.overview.map((para, i) => (
-                <p key={i} className="text-lg leading-relaxed text-ink-soft">
-                  {para}
-                </p>
-              ))}
-            </div>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <div className="rounded-2xl border border-paper-line bg-paper-soft p-6 lg:sticky lg:top-28">
-              <div className="eyebrow">{t("specifications")}</div>
-              <dl className="mt-4 divide-y divide-paper-line">
-                {product.specs.map((s) => (
-                  <div
-                    key={s.label}
-                    className="flex items-center justify-between gap-4 py-3"
-                  >
-                    <dt className="text-sm text-ink-muted">{s.label}</dt>
-                    <dd className="text-right font-mono text-[13px] text-ink">
-                      {s.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </Reveal>
-        </div>
+      {/* Overview — condensed lede + specs as inline pills (V2 density pass) */}
+      <section className="container-x py-14 md:py-20">
+        <Reveal>
+          <div className="eyebrow">{t("overview")}</div>
+          <div className="mt-5 max-w-3xl space-y-4">
+            {product.overview.map((para, i) => (
+              <p key={i} className="text-lg leading-relaxed text-ink-soft">
+                {para}
+              </p>
+            ))}
+          </div>
+          <div className="mt-8 flex flex-wrap gap-2.5">
+            {product.specs.map((s) => (
+              <div
+                key={s.label}
+                className="rounded-full border border-paper-line bg-paper-soft px-4 py-2"
+              >
+                <span className="font-mono text-[10.5px] uppercase tracking-wide2 text-ink-muted">
+                  {s.label}
+                </span>
+                <span className="ml-2 font-mono text-[12px] text-ink">
+                  {s.value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </section>
 
-      {/* Capabilities */}
+      {/* Product-specific immersive showcase — promoted ahead of Capabilities:
+          the visual explains before the text does. */}
+      {Showcase && (
+        <section className="border-t border-paper-line bg-obsidian text-paper-fixed">
+          <div className="container-x py-16 md:py-24">
+            <div className="eyebrow text-paper-fixed/50">
+              {t("showcaseEyebrow")}
+            </div>
+            <h2 className="display-2 mt-3 text-paper-fixed">
+              {t("showcaseTitle")}
+            </h2>
+            <div className="mt-10">
+              <Showcase />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Capabilities — compact one-line-per-item list */}
       <section className="border-t border-paper-line">
-        <div className="container-x py-16 md:py-20">
+        <div className="container-x py-14 md:py-16">
           <Reveal>
             <div className="eyebrow">{t("capabilitiesEyebrow")}</div>
             <h2 className="display-2 mt-3">{t("capabilitiesTitle")}</h2>
           </Reveal>
-          <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-paper-line bg-paper-line md:grid-cols-2">
+          <div className="mt-8 divide-y divide-paper-line border-y border-paper-line">
             {product.capabilities.map((cap, i) => (
-              <Reveal key={cap.title} delay={(i % 2) * 80}>
-                <div className="h-full bg-paper-raised p-7">
-                  <div className="font-mono text-sm text-accent">
-                    0{i + 1}
-                  </div>
-                  <h3 className="mt-4 font-display text-xl text-ink">
+              <Reveal key={cap.title} delay={(i % 2) * 60}>
+                <div className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:gap-6">
+                  <h3 className="font-display text-base text-ink sm:w-64 sm:shrink-0">
                     {cap.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                    {cap.desc}
-                  </p>
+                  <p className="text-sm text-ink-muted">{cap.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -152,32 +165,7 @@ export default async function ProductDetail({
         </div>
       </section>
 
-      {/* Product-specific immersive showcase */}
-      {product.slug === "state-space-sovereignty-model" ? (
-        <SpaceOps />
-      ) : (
-        (() => {
-          const Showcase = SHOWCASES[product.slug];
-          if (!Showcase) return null;
-          return (
-            <section className="border-t border-paper-line bg-obsidian text-paper-fixed">
-              <div className="container-x py-16 md:py-24">
-                <div className="eyebrow text-paper-fixed/50">
-                  {t("showcaseEyebrow")}
-                </div>
-                <h2 className="display-2 mt-3 text-paper-fixed">
-                  {t("showcaseTitle")}
-                </h2>
-                <div className="mt-10">
-                  <Showcase />
-                </div>
-              </div>
-            </section>
-          );
-        })()
-      )}
-
-      {/* Methodology — Reinforcement Learning × Causality */}
+      {/* Approach — condensed methodology (see MethodologySection.tsx) */}
       <MethodologySection product={product} locale={locale} />
 
       {/* Early access */}
@@ -199,6 +187,37 @@ export default async function ProductDetail({
             <Reveal delay={160}>
               <EarlyAccessForm product={product} />
             </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Related models */}
+      <section className="border-t border-paper-line bg-paper-soft">
+        <div className="container-x py-14 md:py-16">
+          <Reveal>
+            <div className="eyebrow">{t("relatedEyebrow")}</div>
+            <h2 className="display-2 mt-3">{t("relatedTitle")}</h2>
+          </Reveal>
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            {related.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 80}>
+                <Link
+                  href={`/products/${p.slug}`}
+                  className="group flex h-full flex-col rounded-2xl border border-paper-line bg-paper-raised p-6 transition-colors hover:border-ink/30"
+                >
+                  <div className="flex items-center justify-between">
+                    <StatusBadge status={p.status} />
+                    <span className="text-ink-faint transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
+                  </div>
+                  <h3 className="mt-4 font-display text-lg text-ink">
+                    {p.name}
+                  </h3>
+                  <p className="mt-1 text-sm text-ink-muted">{p.tagline}</p>
+                </Link>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

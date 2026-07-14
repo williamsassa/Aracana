@@ -39,9 +39,8 @@ export const PRODUCTS_EN: Product[] = [
     summary:
       "A unified, multimodal generative model designed for European languages, regulation and brand-grade output — text, image and video from one sovereign system.",
     overview: [
-      "The ARACANA Generative Model is a single multimodal system that writes, illustrates and animates. It treats text, image and video as one shared representation, so a prompt can flow seamlessly from a written brief to a finished visual sequence.",
-      "It is built sovereignty-first: it can be trained, hosted and audited entirely inside European infrastructure, with full provenance over its training data and outputs. That makes it suitable for regulated industries — finance, public sector, media — where data residency and auditability are non-negotiable.",
-      "Quality is aligned with reinforcement learning against a blend of human-preference and rule-based rewards, so the model learns brand-grade tone, factual grounding and visual fidelity rather than generic averages.",
+      "The ARACANA Generative Model is a single multimodal system that writes, illustrates and animates, treating text, image and video as one shared representation — a prompt flows seamlessly from a written brief to a finished visual sequence.",
+      "It is built sovereignty-first, trainable and auditable entirely inside European infrastructure, and aligned against an explicit quality objective — human preference and rule-based checks — rather than generic averages.",
     ],
     capabilities: [
       { title: "Long-context multilingual text", desc: "Drafting, rewriting and reasoning across European languages with long-document context." },
@@ -52,7 +51,7 @@ export const PRODUCTS_EN: Product[] = [
     specs: [
       { label: "Modalities", value: "Text, Image, Video" },
       { label: "Context", value: "Long-context (target 128K+ tokens)" },
-      { label: "Alignment", value: "Reinforcement Learning + human preference" },
+      { label: "Alignment", value: "Mathematical model + human preference" },
       { label: "Deployment", value: "Cloud / On-prem / Sovereign" },
       { label: "Status", value: "Soon" },
     ],
@@ -79,9 +78,8 @@ export const PRODUCTS_EN: Product[] = [
     summary:
       "A coding agent that plans, edits, runs and tests real codebases — verifying its own work against tests and types before proposing a change.",
     overview: [
-      "The ARACANA Coding Agent Model is trained to operate over real repositories, not isolated snippets. It reads the project, plans a change, edits multiple files, runs the test suite, reads the failures and iterates — with a human in the loop at every gate.",
-      "Because correctness in software is verifiable (it compiles or it doesn't; tests pass or they don't), it is an ideal target for reinforcement learning: the reward is grounded in deterministic execution rather than opinion, which produces a clean, low-noise training signal.",
-      "It is designed for sensitive environments: it can run fully air-gapped, so proprietary or classified source code never leaves sovereign infrastructure.",
+      "The ARACANA Coding Agent Model operates over real repositories, not isolated snippets: it reads the project, plans a change, edits multiple files, runs the test suite, and iterates on failures — with a human in the loop at every gate.",
+      "Because software correctness is verifiable, its alignment signal is grounded in deterministic execution rather than opinion. It can also run fully air-gapped, so classified source code never leaves sovereign infrastructure.",
     ],
     capabilities: [
       { title: "Repo-scale reasoning", desc: "Understands and edits across many files and modules at once." },
@@ -92,7 +90,7 @@ export const PRODUCTS_EN: Product[] = [
     specs: [
       { label: "Interface", value: "CLI · IDE · API" },
       { label: "Verification", value: "Build + tests + type-check" },
-      { label: "Alignment", value: "Reinforcement Learning (execution)" },
+      { label: "Alignment", value: "Mathematical model (execution-verified)" },
       { label: "Deployment", value: "On-prem / Air-gapped" },
       { label: "Status", value: "Soon" },
     ],
@@ -119,9 +117,8 @@ export const PRODUCTS_EN: Product[] = [
     summary:
       "A long-horizon, state-space model for sovereign decision support — efficient over very long sequences, auditable end-to-end, and deployable fully on national infrastructure.",
     overview: [
-      "The ARACANA State Space Sovereignty Model is built on a state-space backbone, giving it near-linear scaling over extremely long sequences — months of signals, sensor streams or documents held in a single context. This makes it well-suited to situational awareness and long-horizon decision support.",
-      "Every inference is traceable. The model exposes the evidence and intermediate state behind each recommendation, so a human authority can audit why a conclusion was reached — a hard requirement for defense, critical infrastructure and public-sector use.",
-      "It is sovereign by construction: weights, training and inference can be hosted entirely within national infrastructure, with no dependency on foreign clouds, and aligned with European command and accountability structures.",
+      "The ARACANA State Space Sovereignty Model runs on a state-space backbone with near-linear scaling over extremely long sequences — months of signals, sensor streams or documents held in a single context.",
+      "Every inference is traceable: the model exposes the evidence behind each recommendation for human audit, and can be hosted entirely within national infrastructure with no foreign-cloud dependency.",
     ],
     capabilities: [
       { title: "Very-long-horizon context", desc: "State-space backbone scales near-linearly over very long sequences." },
@@ -132,7 +129,7 @@ export const PRODUCTS_EN: Product[] = [
     specs: [
       { label: "Architecture", value: "State-space (linear-time)" },
       { label: "Context", value: "Ultra-long horizon" },
-      { label: "Alignment", value: "Reinforcement Learning + causal modelling" },
+      { label: "Alignment", value: "Mathematical model + consistency checks" },
       { label: "Deployment", value: "Sovereign / Air-gapped" },
       { label: "Status", value: "Soon" },
     ],
@@ -159,9 +156,8 @@ export const PRODUCTS_EN: Product[] = [
     summary:
       "An orchestration layer where specialised agents plan, negotiate and self-organise under central oversight — in active development.",
     overview: [
-      "The ARACANA Multi-Agent System coordinates many specialised agents — researchers, coders, verifiers, planners — into a single problem-solving fleet. A central orchestrator decomposes a goal, assigns roles, and reconciles the results.",
-      "Agents share a verifiable memory and communicate over an auditable channel, so the whole system's reasoning can be inspected after the fact. Central oversight keeps emergent behaviour bounded.",
-      "This system is in active development and underpins our other products by letting them call on each other. Its public availability will be announced separately.",
+      "The ARACANA Multi-Agent System coordinates many specialised agents — researchers, coders, verifiers, planners — into a single problem-solving fleet, with a central orchestrator that assigns roles and reconciles results.",
+      "Agents share a verifiable memory and communicate over an auditable channel, keeping emergent behaviour bounded. It is in active development and underpins how our other products call on each other.",
     ],
     capabilities: [
       { title: "Role-specialised agents", desc: "Each agent is tuned for a narrow, well-defined function." },
@@ -172,7 +168,7 @@ export const PRODUCTS_EN: Product[] = [
     specs: [
       { label: "Pattern", value: "Orchestrator + specialists" },
       { label: "Comms", value: "Auditable, logged" },
-      { label: "Alignment", value: "Reinforcement Learning (agent + system)" },
+      { label: "Alignment", value: "Mathematical model (agent + system)" },
       { label: "Deployment", value: "Cloud / On-prem" },
       { label: "Status", value: "In development" },
     ],
@@ -199,9 +195,8 @@ export const PRODUCTS_EN: Product[] = [
     summary:
       "An autonomous research engine for scientific discovery — generating hypotheses, designing molecules and mapping disease pathways — in active development.",
     overview: [
-      "The ARACANA AI Scientist closes the scientific loop: it proposes hypotheses, designs experiments or molecules, evaluates results against simulators and literature, and refines its next proposal. It is aimed squarely at drug discovery and disease understanding.",
-      "It is mechanism-informed: rather than pattern-matching on chemical strings, it reasons with the underlying biology and physics — binding mechanisms, pathways, conservation laws — so its proposals are physically plausible, not just statistically likely.",
-      "This system is in active development. Its outputs are intended to assist, accelerate and be verified by human scientists, never to replace expert and regulatory review.",
+      "The ARACANA AI Scientist closes the scientific loop: it proposes hypotheses, designs experiments or molecules, evaluates results against simulators and literature, and refines its next proposal — aimed squarely at drug discovery and disease understanding.",
+      "It is mechanism-informed, reasoning from the underlying biology and physics rather than pattern-matching on chemical strings, so its proposals are physically plausible. It is in active development, intended to assist and be verified by human scientists.",
     ],
     capabilities: [
       { title: "Hypothesis generation", desc: "Proposes and ranks testable scientific hypotheses." },
@@ -212,7 +207,7 @@ export const PRODUCTS_EN: Product[] = [
     specs: [
       { label: "Domains", value: "Drug discovery · Biology" },
       { label: "Grounding", value: "Simulators + literature" },
-      { label: "Alignment", value: "Reinforcement Learning (simulator)" },
+      { label: "Alignment", value: "Mathematical model (simulator-grounded)" },
       { label: "Deployment", value: "Sovereign / On-prem" },
       { label: "Status", value: "In development" },
     ],

@@ -17,19 +17,14 @@
     "explore": "Explore {name}"
   },
   "header": {
-    "menuToggle": "Toggle menu"
+    "menuToggle": "Toggle menu",
+    "themeToggle": "Toggle light / dark theme"
   },
   "footer": {
     "taglineSuffix": "Frontier AI for European sovereignty across industry, finance and everyday life.",
     "overview": "Overview",
     "careers": "Careers",
     "about": "About Us"
-  },
-  "theme": {
-    "light": "Light",
-    "dark": "Dark",
-    "system": "System",
-    "toggleLabel": "Switch appearance, current: {mode}"
   },
   "language": {
     "switchLabel": "Switch language"
@@ -39,7 +34,11 @@
     "body": "The page you are looking for has drifted off the frontier."
   },
   "home": {
+    "heroTitlePrefix": "Sovereign AI systems built to reason, act and",
+    "heroTitleAccent": "evolve.",
     "heroSubtitle": "AI for the sovereignty of European states and the expansion of artificial intelligence across industry, finance and everyday life.",
+    "visionEyebrow": "Vision",
+    "visionTitle": "Why we exist.",
     "missionItems": [
       { "title": "Sovereign by design", "desc": "Trained, hosted and audited on European infrastructure." },
       { "title": "Frontier capability", "desc": "Recursive self-improvement under human oversight." },
@@ -51,8 +50,10 @@
     "researchEyebrow": "Research",
     "researchTitle": "Where we push the frontier.",
     "researchIntro": "Three long-horizon research axes underpin everything we build.",
-    "ctaTitle": "Build sovereign frontier AI with us.",
-    "ctaSubtitle": "We are hiring researchers and engineers across Europe.",
+    "missionEyebrow": "Mission",
+    "missionTitle": "What drives the work.",
+    "ctaTitle": "Bring sovereign frontier AI to your infrastructure.",
+    "ctaSubtitle": "Explore the model that fits your use case and request early access.",
     "ourModelsEyebrow": "Our Models",
     "ourModelsTitle": "Five models. One sovereign platform.",
     "allModels": "All models"
@@ -84,7 +85,7 @@
     "title": "Build the AI Europe can call its own.",
     "lead": "We are a focused team of researchers and engineers. We move fast, publish our methods, and care deeply about sovereignty, safety and real-world impact.",
     "whyItems": [
-      { "title": "Frontier work", "desc": "Train and align models with reinforcement learning, causality and recursive self-improvement — at the edge of what's possible." },
+      { "title": "Frontier work", "desc": "Train and align models against explicit mathematical objectives, with recursive self-improvement — at the edge of what's possible." },
       { "title": "Sovereign mission", "desc": "Your work strengthens European autonomy in the most strategic technology of the century." },
       { "title": "Real ownership", "desc": "Small team, high trust, direct impact. No layers between you and the model." }
     ],
@@ -99,12 +100,22 @@
   "research": {
     "eyebrow": "Research",
     "title": "Pushing the frontier, under sovereign control.",
-    "lead": "Our research turns three long-horizon bets into the models behind every ARACANA product. Two forces drive everything we train: reinforcement learning and causality.",
+    "lead": "Our research turns three long-horizon bets into the models behind every ARACANA product. One discipline drives everything we train: an explicit, verifiable mathematical model of alignment.",
     "approachEyebrow": "Approach",
-    "approachTitle": "Reinforcement Learning × Causality.",
-    "approachIntro": "Reinforcement learning lets our models improve from outcomes; causality lets them reason about cause and effect rather than correlation. Together they make models that are capable, robust and explainable. See how it applies on any product page.",
+    "approachTitle": "Alignment: A Mathematical Model.",
+    "approachIntro": "An explicit objective function lets our models improve from outcomes; verifiable structure lets them withstand scrutiny beyond average-case performance. Together they make models that are capable, robust and explainable. See how it applies on any product page.",
     "loopEyebrow": "The research loop",
-    "loopTitle": "How a research bet becomes a shipped model."
+    "loopTitle": "How a research bet becomes a shipped model.",
+    "consistencyEyebrow": "Verification",
+    "consistencyTitle": "How a candidate earns trust.",
+    "consistencyLabel": "Candidate output",
+    "consistencyChecks": [
+      "Counterfactual A",
+      "Counterfactual B",
+      "Known constraint",
+      "Held-out eval"
+    ],
+    "consistencyCaption": "Every candidate is checked against counterfactuals and known constraints before it's trusted — the substance behind \"Verifiable Structure\" above."
   },
   "solutions": {
     "eyebrow": "Solutions",
@@ -115,13 +126,13 @@
   "products": {
     "eyebrow": "Products",
     "title": "Sovereign models, in continuous improvement.",
-    "leadPrefix": "Three flagship models lead the lineup, each trained with reinforcement learning and causality, and deployable on European infrastructure. All models are continuously improving — launching",
+    "leadPrefix": "Three flagship models lead the lineup, each aligned against an explicit mathematical objective, and deployable on European infrastructure. All models are continuously improving — launching",
     "leadSuffix": "soon",
     "viewModel": "View model →",
     "alsoEyebrow": "Also in development",
     "alsoLead": "Two further systems run in the background and power the rest of the stack. They are in active development.",
     "everyModelDriven": "Every model is driven by",
-    "approachSubtitle": "Reinforcement Learning × Causality",
+    "approachSubtitle": "Alignment: A Mathematical Model",
     "approachLead": "Open any model to see how our approach shapes it — the learning signals, the loop, and a concrete example."
   },
   "productDetail": {
@@ -136,13 +147,12 @@
     "showcaseTitle": "See it work.",
     "continuouslyImproving": "● Continuously improving · Soon",
     "wantOnInfra": "Want this model on your infrastructure?",
-    "otherModels": "Other models"
+    "otherModels": "Other models",
+    "relatedEyebrow": "Related",
+    "relatedTitle": "Other models in the platform."
   },
   "methodology": {
-    "learningSignalsFor": "Learning signals for {name}",
-    "signal": "Signal",
-    "weight": "Weight",
-    "whatItRewards": "What it rewards"
+    "learningSignalsFor": "Learning signals for {name}"
   },
   "contactForm": {
     "name": "Name",

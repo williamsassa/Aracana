@@ -1,6 +1,9 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  // Light/dark toggled via next-themes' `class` strategy — dark stays the
+  // brand default (see ThemeProvider), light is an explicit opt-in. Token
+  // values live in globals.css :root (light) / .dark (dark).
   darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -35,18 +38,21 @@ const config: Config = {
         // (e.g. text-paper-fixed/60) keep working regardless of active theme.
         obsidian: "#0A0A0B",
         "paper-fixed": "#EFE9DB",
-        // Brand spectrum — used sparingly (orbits, active state, showcases),
-        // reserved for dark mode per the "Operational Intelligence System" direction.
+        // Brand spectrum — V3 (README_ARACANA_BRAND.md): strict 3-colour
+        // palette (violet/blue/cyan) + 2 derived blends so the 5 products
+        // keep distinct identities without introducing hues outside the spec.
         spectrum: {
-          red: "#E5121A",
-          orange: "#FF7A1A",
-          yellow: "#FFC93C",
-          green: "#28C76F",
-          cyan: "#22D3EE",
-          blue: "#3B82F6",
-          violet: "#8B5CF6",
-          magenta: "#E5389B",
+          violet: "#7B5CFF",
+          blue: "#4D9DFF",
+          cyan: "#3EE8FF",
+          violetBlue: "#6272FF",
+          blueCyan: "#45C0FF",
         },
+        // Status colours (README §3) — the one legitimate use of red left,
+        // reserved for real error states.
+        success: "#2ECC71",
+        warning: "#FFB547",
+        error: "#FF5C75",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

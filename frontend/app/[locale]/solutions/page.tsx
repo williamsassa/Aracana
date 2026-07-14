@@ -44,56 +44,43 @@ export default async function SolutionsPage({
         </Reveal>
       </section>
 
-      <div className="hairline" />
-
-      {solutions.map((s, i) => (
-        <section
-          key={s.id}
-          id={s.id}
-          className={`scroll-mt-28 border-b border-paper-line ${
-            i % 2 === 1 ? "bg-paper-soft" : ""
-          }`}
-        >
-          <div
-            className={`container-x grid items-start gap-10 py-16 md:py-20 ${
-              i % 2 === 1
-                ? "md:grid-cols-[1.1fr_0.9fr] md:[&>*:first-child]:order-2"
-                : "md:grid-cols-[0.9fr_1.1fr]"
-            }`}
-          >
-            <Reveal>
-              <SolutionGlyph id={s.id} />
-              <div className="mt-5 flex items-center gap-4">
-                <span className="font-mono text-sm text-ink-faint">
-                  0{i + 1}
-                </span>
-                <StatusBadge status={s.status} />
-              </div>
-              <h2 className="display-2 mt-4">{s.title}</h2>
-            </Reveal>
-            <Reveal delay={120}>
-              <div>
-                <p className="text-lg leading-relaxed text-ink-soft">
+      {/* V2.1: dense grid of compact cards replaces the 6 alternating
+          full-width rows (owner feedback: too repetitive). */}
+      <section className="container-x pb-24 md:pb-32">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {solutions.map((s, i) => (
+            <Reveal key={s.id} delay={(i % 3) * 80}>
+              <div
+                id={s.id}
+                className="glass glass-hover scroll-mt-28 flex h-full flex-col rounded-2xl p-6"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <SolutionGlyph id={s.id} />
+                  <StatusBadge status={s.status} />
+                </div>
+                <h2 className="mt-4 font-display text-xl text-ink">
+                  {s.title}
+                </h2>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-muted">
                   {s.summary}
                 </p>
-                <div className="mt-7 grid gap-3 sm:grid-cols-1">
+                <div className="mt-4 flex flex-wrap gap-1.5">
                   {s.capabilities.map((cap) => (
-                    <div
+                    <span
                       key={cap}
-                      className="flex items-center gap-3 rounded-xl border border-paper-line px-4 py-3"
+                      className="rounded-full border border-paper-line bg-paper-soft px-2.5 py-1 text-[11px] text-ink-muted"
                     >
-                      <span className="font-mono text-xs text-accent">+</span>
-                      <span className="text-sm text-ink-soft">{cap}</span>
-                    </div>
+                      {cap}
+                    </span>
                   ))}
                 </div>
               </div>
             </Reveal>
-          </div>
-        </section>
-      ))}
+          ))}
+        </div>
+      </section>
 
-      <section className="container-x py-20 text-center md:py-28">
+      <section className="border-t border-paper-line py-20 text-center md:py-28">
         <Reveal>
           <h2 className="display-2">{t("ctaTitle")}</h2>
           <div className="mt-8">

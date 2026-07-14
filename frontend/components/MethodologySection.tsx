@@ -1,9 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import Reveal from "./Reveal";
+import WeightBar from "./WeightBar";
 import type { Product } from "@/lib/products";
 import { getMethod } from "@/lib/methodology";
 import type { Locale } from "@/i18n/config";
 
+/** Condensed "Approach" band on each product page — the deep-dive on how
+ * alignment works (the two pillars, the note) lives once on /research
+ * instead of being repeated on every product page (V2 density pass). */
 export default async function MethodologySection({
   product,
   locale,
@@ -18,109 +22,56 @@ export default async function MethodologySection({
       id="methodology"
       className="scroll-mt-28 border-t border-paper-line bg-obsidian text-paper-fixed"
     >
-      <div className="container-x py-20 md:py-28">
-        {/* Header */}
+      <div className="container-x py-16 md:py-20">
         <Reveal>
           <div className="eyebrow text-paper-fixed/50">{METHOD.eyebrow}</div>
-          <h2 className="display-2 mt-3 text-paper-fixed">{METHOD.title}</h2>
-          <p className="mt-2 font-mono text-sm uppercase tracking-wide2 text-accent-soft">
-            {METHOD.subtitle}
+          <h2 className="display-2 mt-3 text-paper-fixed">{METHOD.subtitle}</h2>
+          <p className="lead mt-4 max-w-2xl text-paper-fixed/60">{METHOD.lede}</p>
+          <p className="mt-5 max-w-2xl rounded-xl border border-white/10 bg-white/[0.03] px-5 py-4 font-mono text-[13px] text-accent-soft">
+            {METHOD.formula.display}
           </p>
-          <p className="lead mt-6 max-w-3xl text-paper-fixed/60">{METHOD.lede}</p>
         </Reveal>
 
-        {/* Two pillars */}
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
-          {METHOD.pillars.map((p, i) => (
-            <Reveal key={p.title} delay={i * 100}>
-              <div className="h-full rounded-2xl border border-white/12 bg-white/[0.03] p-8">
-                <div className="font-mono text-sm text-accent-soft">{p.tag}</div>
-                <h3 className="mt-4 font-display text-2xl text-paper-fixed">
-                  {p.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-paper-fixed/65">
-                  {p.body}
-                </p>
-                <ul className="mt-5 space-y-2.5">
-                  {p.points.map((pt) => (
-                    <li key={pt} className="flex gap-3 text-sm text-paper-fixed/80">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        {/* The loop */}
-        <Reveal>
-          <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 md:grid-cols-3">
-            {METHOD.loop.map((s) => (
-              <div key={s.n} className="bg-obsidian p-7">
-                <div className="font-mono text-sm text-accent-soft">{s.n}</div>
-                <h4 className="mt-3 font-display text-lg text-paper-fixed">
-                  {s.title}
-                </h4>
-                <p className="mt-1.5 text-sm leading-relaxed text-paper-fixed/60">
-                  {s.body}
-                </p>
+        {/* Compact 3-step loop — icon/number + title only */}
+        <Reveal delay={80}>
+          <div className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2">
+            {METHOD.loop.map((s, i) => (
+              <div key={s.n} className="flex items-center gap-3">
+                <span className="flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.03] px-4 py-2">
+                  <span className="font-mono text-xs text-accent-soft">{s.n}</span>
+                  <span className="font-display text-sm text-paper-fixed">
+                    {s.title}
+                  </span>
+                </span>
+                {i < METHOD.loop.length - 1 && (
+                  <span className="text-paper-fixed/30">→</span>
+                )}
               </div>
             ))}
           </div>
         </Reveal>
 
         {/* Product-specific learning signals */}
-        <Reveal>
-          <div className="mt-16">
-            <h3 className="font-display text-2xl text-paper-fixed">
+        <Reveal delay={140}>
+          <div className="mt-14">
+            <h3 className="font-display text-xl text-paper-fixed">
               {t("learningSignalsFor", { name: product.name })}
             </h3>
-            <p className="mt-3 max-w-3xl text-paper-fixed/60">{product.rewardIntro}</p>
-
-            <div className="mt-7 overflow-x-auto rounded-2xl border border-white/12">
-              <table className="w-full min-w-[640px] text-left text-sm">
-                <thead>
-                  <tr className="border-b border-white/12 text-paper-fixed/45">
-                    <th className="px-5 py-3 font-mono text-[11px] uppercase tracking-wide2">
-                      {t("signal")}
-                    </th>
-                    <th className="px-5 py-3 font-mono text-[11px] uppercase tracking-wide2">
-                      {t("weight")}
-                    </th>
-                    <th className="px-5 py-3 font-mono text-[11px] uppercase tracking-wide2">
-                      {t("whatItRewards")}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {product.rewardComponents.map((c) => (
-                    <tr
-                      key={c.signal}
-                      className="border-b border-white/8 last:border-0"
-                    >
-                      <td className="px-5 py-3 text-paper-fixed">{c.signal}</td>
-                      <td className="px-5 py-3 font-mono text-accent-soft">
-                        {c.weight}
-                      </td>
-                      <td className="px-5 py-3 text-paper-fixed/55">{c.desc}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="mt-6 grid gap-6 sm:grid-cols-2">
+              {product.rewardComponents.map((c) => (
+                <WeightBar
+                  key={c.signal}
+                  label={c.signal}
+                  weight={c.weight}
+                  desc={c.desc}
+                />
+              ))}
             </div>
 
-            <p className="mt-6 max-w-3xl rounded-2xl border-l-2 border-accent bg-white/[0.03] px-6 py-5 text-paper-fixed/75">
+            <p className="mt-8 max-w-3xl rounded-2xl border-l-2 border-accent bg-white/[0.03] px-6 py-5 text-[13px] leading-relaxed text-paper-fixed/75">
               {product.rewardExample}
             </p>
           </div>
-        </Reveal>
-
-        <Reveal>
-          <p className="mt-12 font-mono text-[11px] uppercase tracking-wide2 text-paper-fixed/35">
-            {METHOD.note}
-          </p>
         </Reveal>
       </div>
     </section>

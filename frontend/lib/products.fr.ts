@@ -17,9 +17,8 @@ export const PRODUCTS_FR: Product[] = [
     summary:
       "Un modèle génératif multimodal unifié, conçu pour les langues européennes, la conformité réglementaire et une qualité de production professionnelle — texte, image et vidéo depuis un seul système souverain.",
     overview: [
-      "L'ARACANA Generative Model est un système multimodal unique qui rédige, illustre et anime. Il traite le texte, l'image et la vidéo comme une seule représentation partagée, permettant à un prompt de passer sans rupture d'un brief écrit à une séquence visuelle finalisée.",
-      "Il est construit souveraineté d'abord : il peut être entraîné, hébergé et audité entièrement au sein d'infrastructures européennes, avec une traçabilité complète de ses données d'entraînement et de ses productions. Cela le rend adapté aux secteurs réglementés — finance, secteur public, médias — où la résidence des données et l'auditabilité ne sont pas négociables.",
-      "La qualité est alignée par apprentissage par renforcement sur un mélange de récompenses fondées sur les préférences humaines et sur des règles, de sorte que le modèle apprend un ton de marque, un ancrage factuel et une fidélité visuelle plutôt que des moyennes génériques.",
+      "L'ARACANA Generative Model est un système multimodal unique qui rédige, illustre et anime, en traitant le texte, l'image et la vidéo comme une seule représentation partagée — un prompt passe sans rupture d'un brief écrit à une séquence visuelle finalisée.",
+      "Il est construit souveraineté d'abord, entraînable et auditable entièrement au sein d'infrastructures européennes, et aligné selon un objectif de qualité explicite — préférence humaine et vérifications à base de règles — plutôt que des moyennes génériques.",
     ],
     capabilities: [
       { title: "Texte multilingue à long contexte", desc: "Rédaction, réécriture et raisonnement à travers les langues européennes avec un contexte de document long." },
@@ -30,7 +29,7 @@ export const PRODUCTS_FR: Product[] = [
     specs: [
       { label: "Modalités", value: "Texte, Image, Vidéo" },
       { label: "Contexte", value: "Contexte long (objectif 128K+ tokens)" },
-      { label: "Alignement", value: "Apprentissage par renforcement + préférence humaine" },
+      { label: "Alignement", value: "Modèle mathématique + préférence humaine" },
       { label: "Déploiement", value: "Cloud / On-prem / Souverain" },
       { label: "Statut", value: "Bientôt" },
     ],
@@ -57,9 +56,8 @@ export const PRODUCTS_FR: Product[] = [
     summary:
       "Un agent de développement qui planifie, modifie, exécute et teste de vraies bases de code — vérifiant son propre travail par les tests et le typage avant de proposer un changement.",
     overview: [
-      "L'ARACANA Coding Agent Model est entraîné pour opérer sur de vrais dépôts, pas sur des extraits isolés. Il lit le projet, planifie un changement, modifie plusieurs fichiers, exécute la suite de tests, lit les échecs et itère — avec un humain dans la boucle à chaque étape de validation.",
-      "Parce que la correction en logiciel est vérifiable (ça compile ou non ; les tests passent ou non), c'est une cible idéale pour l'apprentissage par renforcement : la récompense est ancrée dans une exécution déterministe plutôt que dans une opinion, ce qui produit un signal d'entraînement propre et peu bruité.",
-      "Il est conçu pour les environnements sensibles : il peut fonctionner entièrement hors ligne (air-gapped), afin que le code source propriétaire ou classifié ne quitte jamais l'infrastructure souveraine.",
+      "L'ARACANA Coding Agent Model opère sur de vrais dépôts, pas sur des extraits isolés : il lit le projet, planifie un changement, modifie plusieurs fichiers, exécute la suite de tests et itère sur les échecs — avec un humain dans la boucle à chaque étape de validation.",
+      "Parce que la correction du logiciel est vérifiable, son signal d'alignement est ancré dans une exécution déterministe plutôt que dans une opinion. Il peut aussi fonctionner entièrement hors ligne, afin que le code source classifié ne quitte jamais l'infrastructure souveraine.",
     ],
     capabilities: [
       { title: "Raisonnement à l'échelle du dépôt", desc: "Comprend et modifie de nombreux fichiers et modules à la fois." },
@@ -70,7 +68,7 @@ export const PRODUCTS_FR: Product[] = [
     specs: [
       { label: "Interface", value: "CLI · IDE · API" },
       { label: "Vérification", value: "Build + tests + vérification de types" },
-      { label: "Alignement", value: "Apprentissage par renforcement (exécution)" },
+      { label: "Alignement", value: "Modèle mathématique (vérifié par exécution)" },
       { label: "Déploiement", value: "On-prem / Air-gapped" },
       { label: "Statut", value: "Bientôt" },
     ],
@@ -97,9 +95,8 @@ export const PRODUCTS_FR: Product[] = [
     summary:
       "Un modèle à espace d'états à très long horizon pour l'aide à la décision souveraine — efficace sur des séquences très longues, auditable de bout en bout, et déployable entièrement sur une infrastructure nationale.",
     overview: [
-      "L'ARACANA State Space Sovereignty Model repose sur une architecture à espace d'états, lui conférant une mise à l'échelle quasi linéaire sur des séquences extrêmement longues — des mois de signaux, de flux de capteurs ou de documents tenus dans un seul contexte. Cela le rend particulièrement adapté à la conscience situationnelle et à l'aide à la décision à long horizon.",
-      "Chaque inférence est traçable. Le modèle expose les preuves et l'état intermédiaire derrière chaque recommandation, afin qu'une autorité humaine puisse auditer pourquoi une conclusion a été atteinte — une exigence incontournable pour la défense, les infrastructures critiques et le secteur public.",
-      "Il est souverain par construction : poids, entraînement et inférence peuvent être hébergés entièrement au sein d'une infrastructure nationale, sans dépendance à un cloud étranger, et alignés sur les structures de commandement et de responsabilité européennes.",
+      "L'ARACANA State Space Sovereignty Model repose sur une architecture à espace d'états à mise à l'échelle quasi linéaire sur des séquences extrêmement longues — des mois de signaux, de flux de capteurs ou de documents tenus dans un seul contexte.",
+      "Chaque inférence est traçable : le modèle expose les preuves derrière chaque recommandation pour audit humain, et peut être hébergé entièrement au sein d'une infrastructure nationale sans dépendance à un cloud étranger.",
     ],
     capabilities: [
       { title: "Contexte à très long horizon", desc: "Architecture à espace d'états qui s'étend de façon quasi linéaire sur des séquences très longues." },
@@ -110,7 +107,7 @@ export const PRODUCTS_FR: Product[] = [
     specs: [
       { label: "Architecture", value: "Espace d'états (temps linéaire)" },
       { label: "Contexte", value: "Horizon ultra-long" },
-      { label: "Alignement", value: "Apprentissage par renforcement + modélisation causale" },
+      { label: "Alignement", value: "Modèle mathématique + vérifications de cohérence" },
       { label: "Déploiement", value: "Souverain / Air-gapped" },
       { label: "Statut", value: "Bientôt" },
     ],
@@ -137,9 +134,8 @@ export const PRODUCTS_FR: Product[] = [
     summary:
       "Une couche d'orchestration où des agents spécialisés planifient, négocient et s'auto-organisent sous supervision centrale — en développement actif.",
     overview: [
-      "L'ARACANA Multi-Agent System coordonne de nombreux agents spécialisés — chercheurs, développeurs, vérificateurs, planificateurs — en une seule flotte de résolution de problèmes. Un orchestrateur central décompose un objectif, attribue des rôles et concilie les résultats.",
-      "Les agents partagent une mémoire vérifiable et communiquent sur un canal auditable, de sorte que le raisonnement de l'ensemble du système puisse être inspecté a posteriori. La supervision centrale maintient les comportements émergents dans des limites définies.",
-      "Ce système est en développement actif et sous-tend nos autres produits en leur permettant de se solliciter mutuellement. Sa disponibilité publique sera annoncée séparément.",
+      "L'ARACANA Multi-Agent System coordonne de nombreux agents spécialisés — chercheurs, développeurs, vérificateurs, planificateurs — en une seule flotte de résolution de problèmes, avec un orchestrateur central qui attribue les rôles et concilie les résultats.",
+      "Les agents partagent une mémoire vérifiable et communiquent sur un canal auditable, maintenant les comportements émergents dans des limites définies. Il est en développement actif et sous-tend la façon dont nos autres produits se sollicitent mutuellement.",
     ],
     capabilities: [
       { title: "Agents spécialisés par rôle", desc: "Chaque agent est ajusté pour une fonction étroite et bien définie." },
@@ -150,7 +146,7 @@ export const PRODUCTS_FR: Product[] = [
     specs: [
       { label: "Modèle", value: "Orchestrateur + spécialistes" },
       { label: "Communications", value: "Auditables, journalisées" },
-      { label: "Alignement", value: "Apprentissage par renforcement (agent + système)" },
+      { label: "Alignement", value: "Modèle mathématique (agent + système)" },
       { label: "Déploiement", value: "Cloud / On-prem" },
       { label: "Statut", value: "En développement" },
     ],
@@ -177,9 +173,8 @@ export const PRODUCTS_FR: Product[] = [
     summary:
       "Un moteur de recherche autonome pour la découverte scientifique — générant des hypothèses, concevant des molécules et cartographiant des voies physiopathologiques — en développement actif.",
     overview: [
-      "L'ARACANA AI Scientist referme la boucle scientifique : il propose des hypothèses, conçoit des expériences ou des molécules, évalue les résultats face à des simulateurs et à la littérature, puis affine sa prochaine proposition. Il vise directement la découverte de médicaments et la compréhension des maladies.",
-      "Il est informé par les mécanismes : plutôt que de faire du pattern-matching sur des chaînes chimiques, il raisonne à partir de la biologie et de la physique sous-jacentes — mécanismes de liaison, voies métaboliques, lois de conservation — de sorte que ses propositions sont physiquement plausibles, pas seulement statistiquement probables.",
-      "Ce système est en développement actif. Ses productions sont destinées à assister, accélérer et être vérifiées par des scientifiques humains, jamais à remplacer la revue d'experts et réglementaire.",
+      "L'ARACANA AI Scientist referme la boucle scientifique : il propose des hypothèses, conçoit des expériences ou des molécules, évalue les résultats face à des simulateurs et à la littérature, puis affine sa prochaine proposition — visant directement la découverte de médicaments et la compréhension des maladies.",
+      "Il est informé par les mécanismes, raisonnant à partir de la biologie et de la physique sous-jacentes plutôt que par pattern-matching sur des chaînes chimiques, ses propositions sont donc physiquement plausibles. Il est en développement actif, destiné à assister et être vérifié par des scientifiques humains.",
     ],
     capabilities: [
       { title: "Génération d'hypothèses", desc: "Propose et classe des hypothèses scientifiques testables." },
@@ -190,7 +185,7 @@ export const PRODUCTS_FR: Product[] = [
     specs: [
       { label: "Domaines", value: "Découverte de médicaments · Biologie" },
       { label: "Ancrage", value: "Simulateurs + littérature" },
-      { label: "Alignement", value: "Apprentissage par renforcement (simulateur)" },
+      { label: "Alignement", value: "Modèle mathématique (ancré au simulateur)" },
       { label: "Déploiement", value: "Souverain / On-prem" },
       { label: "Statut", value: "En développement" },
     ],

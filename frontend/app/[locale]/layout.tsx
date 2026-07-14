@@ -6,6 +6,8 @@ import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackgroundFX from "@/components/BackgroundFX";
+import SmoothScroll from "@/components/SmoothScroll";
+import HashScrollSync from "@/components/HashScrollSync";
 import ThemeProvider from "@/components/ThemeProvider";
 import { locales, type Locale } from "@/i18n/config";
 import { buildAlternates } from "@/lib/seo";
@@ -54,8 +56,8 @@ export async function generateMetadata({
       "AI scientist",
       "state defense AI",
       "multi-agent systems",
-      "reinforcement learning",
-      "causality",
+      "AI alignment",
+      "mathematical model",
     ],
     metadataBase: new URL("https://aracana.ai"),
     alternates: buildAlternates("/"),
@@ -81,16 +83,19 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      suppressHydrationWarning
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrains.variable}`}
+      suppressHydrationWarning
     >
       <body className="min-h-screen bg-paper font-sans antialiased">
         <ThemeProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <BackgroundFX />
-            <Header />
-            <main className="pt-[72px]">{children}</main>
-            <Footer />
+            <SmoothScroll>
+              <HashScrollSync />
+              <BackgroundFX />
+              <Header />
+              <main className="pt-[72px]">{children}</main>
+              <Footer />
+            </SmoothScroll>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

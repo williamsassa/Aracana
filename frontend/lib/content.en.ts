@@ -18,11 +18,10 @@ export const RESEARCH_EN: ResearchAxis[] = [
     index: "01",
     title: "Recursive Self-Improvement",
     abstract:
-      "We study AI systems that improve their own learning process. Instead of a single static training run, an ARACANA model proposes refinements to its data curation, reward shaping and optimisation schedule, evaluates them, and folds the winning changes back into the next iteration — a controlled, auditable loop rather than an open-ended one.",
+      "We study AI systems that improve their own learning process — proposing refinements to data curation, reward shaping and optimisation, evaluating them, and folding the winning changes back into the next iteration. A controlled, auditable loop, not an open-ended one.",
     points: [
       "Self-curated curricula: the model ranks and re-weights its own training mixtures under a measurable proxy of capability and safety.",
-      "Reward-model co-training, where the evaluator and the policy improve together under explicit guardrails and human checkpoints.",
-      "Verifiable improvement: every self-edit is logged, reproducible and gated by held-out evaluations before it is allowed to persist.",
+      "Verifiable improvement: every self-edit is logged, reproducible and gated by held-out evaluations before it persists.",
     ],
     navBlurb: "Systems that refine their own training loops.",
   },
@@ -31,10 +30,9 @@ export const RESEARCH_EN: ResearchAxis[] = [
     index: "02",
     title: "Mechanism-Informed Multimodal AI",
     abstract:
-      "Frontier models that respect the mechanisms of the physical world. We fuse language, vision, signals and structured simulation so that an ARACANA model reasons with the laws of a domain — physics, chemistry, biology, control — rather than only with surface correlations in text.",
+      "Frontier models that respect the mechanisms of the physical world — fusing language, vision, signals and structured simulation so a model reasons with the laws of a domain rather than surface correlations in text.",
     points: [
       "Physics- and biology-aware priors injected directly into the architecture and the loss.",
-      "Cross-modal grounding: text, image, video, time-series and molecular structure share one latent space.",
       "Mechanism consistency checks that flag outputs violating known conservation laws or biological constraints.",
     ],
     navBlurb: "Models grounded in physical mechanisms.",
@@ -44,10 +42,9 @@ export const RESEARCH_EN: ResearchAxis[] = [
     index: "03",
     title: "State Integrity & Sovereignty",
     abstract:
-      "AI that strengthens, rather than erodes, the autonomy of European states. We design models that can be trained, audited, hosted and governed entirely within sovereign infrastructure, with verifiable provenance and on-premise deployment as first-class requirements.",
+      "AI that strengthens, rather than erodes, the autonomy of European states — trained, audited, hosted and governed entirely within sovereign infrastructure, with verifiable provenance and on-premise deployment as first-class requirements.",
     points: [
       "Sovereign-by-construction: training, weights and inference can live fully inside national infrastructure.",
-      "Provenance and auditability of data, model lineage and every decision the system makes.",
       "Resilience and integrity guarantees for critical-function deployments under adversarial conditions.",
     ],
     navBlurb: "AI aligned with national & European sovereignty.",

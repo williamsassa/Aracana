@@ -4,7 +4,10 @@ import { Link } from "@/i18n/navigation";
 import { SectionHeading } from "@/components/Bits";
 import Reveal from "@/components/Reveal";
 import ResearchLoop from "@/components/ResearchLoop";
+import MathematicalModelViz from "@/components/MathematicalModelViz";
+import ConsistencyGraphViz from "@/components/ConsistencyGraphViz";
 import { getResearch } from "@/lib/content";
+import { getMethod } from "@/lib/methodology";
 import { buildAlternates } from "@/lib/seo";
 import type { Locale } from "@/i18n/config";
 
@@ -33,6 +36,7 @@ export default async function ResearchPage({
   const t = await getTranslations({ locale, namespace: "research" });
   const c = await getTranslations({ locale, namespace: "common" });
   const research = getResearch(locale);
+  const method = getMethod(locale);
 
   return (
     <>
@@ -78,6 +82,9 @@ export default async function ResearchPage({
         </section>
       ))}
 
+      {/* Mathematical Model — replaces the long-form methodology text with
+          the formula + the two alignment pillars (V2: "the visual explains
+          before the text does") */}
       <section className="container-x py-20 md:py-28">
         <Reveal>
           <SectionHeading
@@ -86,25 +93,55 @@ export default async function ResearchPage({
             intro={t("approachIntro")}
           />
         </Reveal>
-        <Reveal delay={120}>
-          <div className="mt-4">
+        <MathematicalModelViz method={method} />
+      </section>
+
+      {/* The research loop */}
+      <section className="border-t border-paper-line bg-paper-soft">
+        <div className="container-x py-20 md:py-28">
+          <Reveal>
             <div className="eyebrow">{t("loopEyebrow")}</div>
             <h3 className="mt-2 font-display text-xl text-ink">
               {t("loopTitle")}
             </h3>
-          </div>
-        </Reveal>
-        <ResearchLoop locale={locale} />
+          </Reveal>
+          <ResearchLoop locale={locale} />
+        </div>
+      </section>
+
+      {/* Consistency graph — the "Verifiable Structure" pillar, visualised */}
+      <section className="container-x py-20 md:py-28">
         <Reveal>
-          <div className="mt-10">
+          <div className="eyebrow">{t("consistencyEyebrow")}</div>
+          <h3 className="mt-2 font-display text-xl text-ink">
+            {t("consistencyTitle")}
+          </h3>
+        </Reveal>
+        <div className="mt-10">
+          <ConsistencyGraphViz
+            label={t("consistencyLabel")}
+            checks={t.raw("consistencyChecks") as string[]}
+            caption={t("consistencyCaption")}
+          />
+        </div>
+      </section>
+
+      <section className="border-t border-paper-line">
+        <div className="container-x flex flex-col items-center gap-6 py-16 text-center">
+          <Reveal>
+            <p className="font-mono text-[11px] uppercase tracking-wide2 text-ink-faint">
+              {method.note}
+            </p>
+          </Reveal>
+          <Reveal delay={80}>
             <Link
               href="/products/coding-agent-model#methodology"
               className="btn-dark"
             >
               {c("seeOurApproach")}
             </Link>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </section>
     </>
   );

@@ -17,19 +17,14 @@
     "explore": "Découvrir {name}"
   },
   "header": {
-    "menuToggle": "Afficher/masquer le menu"
+    "menuToggle": "Afficher/masquer le menu",
+    "themeToggle": "Basculer entre thème clair et sombre"
   },
   "footer": {
     "taglineSuffix": "Une IA de pointe pour la souveraineté européenne dans l'industrie, la finance et la vie quotidienne.",
     "overview": "Aperçu",
     "careers": "Carrières",
     "about": "À propos"
-  },
-  "theme": {
-    "light": "Clair",
-    "dark": "Sombre",
-    "system": "Système",
-    "toggleLabel": "Changer l'apparence, actuel : {mode}"
   },
   "language": {
     "switchLabel": "Changer de langue"
@@ -39,7 +34,11 @@
     "body": "La page que vous cherchez s'est perdue au-delà de la frontière."
   },
   "home": {
+    "heroTitlePrefix": "Des systèmes d'IA souverains conçus pour raisonner, agir et",
+    "heroTitleAccent": "évoluer.",
     "heroSubtitle": "Une IA pour la souveraineté des États européens et l'expansion de l'intelligence artificielle dans l'industrie, la finance et la vie quotidienne.",
+    "visionEyebrow": "Vision",
+    "visionTitle": "Pourquoi nous existons.",
     "missionItems": [
       { "title": "Souveraine par conception", "desc": "Entraînée, hébergée et auditée sur une infrastructure européenne." },
       { "title": "Capacité de pointe", "desc": "Auto-amélioration récursive sous supervision humaine." },
@@ -51,8 +50,10 @@
     "researchEyebrow": "Recherche",
     "researchTitle": "Là où nous repoussons la frontière.",
     "researchIntro": "Trois axes de recherche à long horizon sous-tendent tout ce que nous construisons.",
-    "ctaTitle": "Construisez une IA de pointe souveraine avec nous.",
-    "ctaSubtitle": "Nous recrutons des chercheurs et des ingénieurs à travers l'Europe.",
+    "missionEyebrow": "Mission",
+    "missionTitle": "Ce qui anime notre travail.",
+    "ctaTitle": "Apportez une IA de pointe souveraine à votre infrastructure.",
+    "ctaSubtitle": "Découvrez le modèle adapté à votre usage et demandez un accès anticipé.",
     "ourModelsEyebrow": "Nos modèles",
     "ourModelsTitle": "Cinq modèles. Une plateforme souveraine.",
     "allModels": "Tous les modèles"
@@ -84,7 +85,7 @@
     "title": "Construisez l'IA que l'Europe peut appeler la sienne.",
     "lead": "Nous sommes une équipe resserrée de chercheurs et d'ingénieurs. Nous avançons vite, publions nos méthodes, et tenons profondément à la souveraineté, à la sécurité et à l'impact réel.",
     "whyItems": [
-      { "title": "Travail de pointe", "desc": "Entraîner et aligner des modèles avec l'apprentissage par renforcement, la causalité et l'auto-amélioration récursive — à la limite du possible." },
+      { "title": "Travail de pointe", "desc": "Entraîner et aligner des modèles selon des objectifs mathématiques explicites, avec auto-amélioration récursive — à la limite du possible." },
       { "title": "Mission souveraine", "desc": "Votre travail renforce l'autonomie européenne dans la technologie la plus stratégique du siècle." },
       { "title": "Une véritable appropriation", "desc": "Petite équipe, confiance élevée, impact direct. Aucune couche entre vous et le modèle." }
     ],
@@ -99,12 +100,22 @@
   "research": {
     "eyebrow": "Recherche",
     "title": "Repousser la frontière, sous contrôle souverain.",
-    "lead": "Notre recherche transforme trois paris à long horizon en modèles qui sous-tendent chaque produit ARACANA. Deux forces animent tout ce que nous entraînons : l'apprentissage par renforcement et la causalité.",
+    "lead": "Notre recherche transforme trois paris à long horizon en modèles qui sous-tendent chaque produit ARACANA. Une seule discipline anime tout ce que nous entraînons : un modèle mathématique d'alignement explicite et vérifiable.",
     "approachEyebrow": "Approche",
-    "approachTitle": "Apprentissage par renforcement × Causalité.",
-    "approachIntro": "L'apprentissage par renforcement permet à nos modèles de progresser à partir de résultats ; la causalité leur permet de raisonner sur la cause et l'effet plutôt que sur la corrélation. Ensemble, ils produisent des modèles capables, robustes et explicables. Découvrez comment cela s'applique sur n'importe quelle page produit.",
+    "approachTitle": "Alignement : un modèle mathématique.",
+    "approachIntro": "Une fonction objectif explicite permet à nos modèles de progresser à partir de résultats ; une structure vérifiable leur permet de résister à l'examen au-delà de la performance moyenne. Ensemble, ils produisent des modèles capables, robustes et explicables. Découvrez comment cela s'applique sur n'importe quelle page produit.",
     "loopEyebrow": "La boucle de recherche",
-    "loopTitle": "Comment un pari de recherche devient un modèle livré."
+    "loopTitle": "Comment un pari de recherche devient un modèle livré.",
+    "consistencyEyebrow": "Vérification",
+    "consistencyTitle": "Comment un candidat gagne la confiance.",
+    "consistencyLabel": "Résultat candidat",
+    "consistencyChecks": [
+      "Contrefactuel A",
+      "Contrefactuel B",
+      "Contrainte connue",
+      "Évaluation de contrôle"
+    ],
+    "consistencyCaption": "Chaque candidat est vérifié face à des contrefactuels et des contraintes connues avant d'être jugé fiable — la substance derrière la « structure vérifiable » ci-dessus."
   },
   "solutions": {
     "eyebrow": "Solutions",
@@ -115,13 +126,13 @@
   "products": {
     "eyebrow": "Produits",
     "title": "Des modèles souverains, en amélioration continue.",
-    "leadPrefix": "Trois modèles phares mènent la gamme, chacun entraîné par apprentissage par renforcement et causalité, et déployable sur une infrastructure européenne. Tous les modèles sont en amélioration continue — lancement",
+    "leadPrefix": "Trois modèles phares mènent la gamme, chacun aligné selon un objectif mathématique explicite, et déployable sur une infrastructure européenne. Tous les modèles sont en amélioration continue — lancement",
     "leadSuffix": "bientôt",
     "viewModel": "Voir le modèle →",
     "alsoEyebrow": "Également en développement",
     "alsoLead": "Deux autres systèmes fonctionnent en arrière-plan et alimentent le reste de la pile. Ils sont en développement actif.",
     "everyModelDriven": "Chaque modèle est piloté par",
-    "approachSubtitle": "Apprentissage par renforcement × Causalité",
+    "approachSubtitle": "Alignement : un modèle mathématique",
     "approachLead": "Ouvrez n'importe quel modèle pour voir comment notre approche le façonne — les signaux d'apprentissage, la boucle, et un exemple concret."
   },
   "productDetail": {
@@ -136,13 +147,12 @@
     "showcaseTitle": "Voir le modèle à l'œuvre.",
     "continuouslyImproving": "● Amélioration continue · Bientôt",
     "wantOnInfra": "Vous voulez ce modèle sur votre infrastructure ?",
-    "otherModels": "Autres modèles"
+    "otherModels": "Autres modèles",
+    "relatedEyebrow": "À découvrir aussi",
+    "relatedTitle": "Les autres modèles de la plateforme."
   },
   "methodology": {
-    "learningSignalsFor": "Signaux d'apprentissage pour {name}",
-    "signal": "Signal",
-    "weight": "Poids",
-    "whatItRewards": "Ce qu'il récompense"
+    "learningSignalsFor": "Signaux d'apprentissage pour {name}"
   },
   "contactForm": {
     "name": "Nom",
